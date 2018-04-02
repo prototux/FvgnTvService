@@ -1,3 +1,10 @@
+# Libraries and dependencies
+lib/
+deps/
+
+# Final binary
+fvgntvservice
+
 # Prerequisites
 *.d
 
