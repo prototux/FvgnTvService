@@ -31,6 +31,9 @@ There's no automated way to do it, follow instructions in [TCL-TV-RE](https://gi
 NB: The "Sita only" features are ones that i didn't planned to do, if somebody ask for it or contribute it, it may change. (these are not planned because i personaly have no use for it or my TV doesn't support it)
 
 ### Feature table / "sita vs fvgn" / Status
+
+It is a very early project, so don't expect any usuable binary soon.
+
 | Feature                  | sita vs fvgn | Status |
 | ------------------------ | ------------ | ------ |
 | Power on sequence        | sita + fvgn  | todo   |
