@@ -9,4 +9,7 @@
 #include "api_video.h"
 #include "api_zoom.h"
 
+#define API_BADREQUEST_JSON "{\"error\": 400, \"message\": \"No data\"}"
+#define API_BADMETHOD_JSON "{\"error\": 405, \"message\": \"Method not allowed\"}"
+
 #endif /* __API_ALL_H__ */

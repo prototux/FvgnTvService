@@ -17,9 +17,9 @@ $(NAME): $(OBJ)
 	$(CC) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $(NAME)
 
 upload:
-	ssh root@${TV_IP} "killall -s KILL ${NAME} 2>/dev/null || exit 0"
-	cat ./${NAME} | ssh root@${TV_IP} "cat > /tmp/${NAME}"
-	ssh root@${TV_IP} "chmod +x /tmp/${NAME}"
+	ssh -i ~/.ssh/tv_key root@${TV_IP} "killall -s KILL ${NAME} 2>/dev/null || exit 0"
+	cat ./${NAME} | ssh -i ~/.ssh/tv_key root@${TV_IP} "cat > /tmp/${NAME}"
+	ssh -i ~/.ssh/tv_key root@${TV_IP} "chmod +x /tmp/${NAME}"
 
 clean:
 	rm -f $(OBJ) $(NAME)

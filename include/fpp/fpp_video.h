@@ -1,6 +1,6 @@
 /**
  * @file fpp_video.h
- * fpp_video is not defined yet
+ * Management of video parameters
  */
 #ifndef __FPP_VIDEO_H__
 #define __FPP_VIDEO_H__
@@ -84,10 +84,10 @@ void fpp_video_mute(int mute);
 
 /**
  * @brief Set video brightness
- * @param unknown Unknown parameter, always 1
- * @param params Video adjustement item for brightness
+ * @param unknown Unknown, set to 1 when called from sita, 0 from libfpp
+ * @param adj A video adjustement struct that contains the values, low and high are ignored.
  */
-void fpp_video_set_brightness(int unknown, struct fpp_video_adj *params);
+void fpp_video_set_brightness(uint8_t unknown, struct fpp_video_adj adj);
 
 /**
  * fpp_video_set_color_param is not documented yet.
