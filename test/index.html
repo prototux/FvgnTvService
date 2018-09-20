@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>fvgntvservice remote</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+	<label for="tvip">TV IP</label><input type="text" name="tvip" id="tvip" />
+
+
+	<label for="brightness">Brightness (<span id="brightness-now"></span>)</label>
+	<input type="range" id="brightness" name="brightness" min="0" max="100" />
+
+<script>
+$("#brightness").change(function () {
+	var value = $(this).val()
+	$("#brightness-now").text(value)
+	$.ajax({
+		url: 'http://'+$('#tvip').val()+':8080/video/brightness',
+		type: 'POST',
+		data: JSON.stringify({"value": value}),
+		dataType: 'json',
+		contentType: false,
+		crossDomain: true
+	})
+  })
+  .change();
+</script>
+</body>
+</html>
