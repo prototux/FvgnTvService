@@ -66,6 +66,15 @@ void platform_init()
 	fpp_factory_watch_dog_operate(WATCHDOG_DISABLE);
 }
 
+void platform_init_video(void)
+{
+	platform_video_set_brightness(90);
+	platform_video_set_contrast(80);
+	platform_video_set_hue(50);
+	platform_video_set_saturation(50);
+	platform_video_set_sharpness(100);
+}
+
 void platform_open_hdmi(void)
 {
     struct fpp_signal_format sig_format = {

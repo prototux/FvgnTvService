@@ -4,5 +4,9 @@
 #include "platform_init.h"
 
 extern uint8_t platform_video_brightness;
+extern uint8_t platform_video_contrast;
+extern uint8_t platform_video_saturation;
+extern uint8_t platform_video_hue;
+extern uint8_t platform_video_sharpness;
 
 #endif /* __PLATFORM_H__ */

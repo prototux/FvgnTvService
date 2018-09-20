@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 {
 	// Init FPP
 	platform_init();
+	platform_init_video();
 	platform_open_hdmi();
 
 	// Libonion test
