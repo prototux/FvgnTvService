@@ -142,3 +142,9 @@ onion_connection_status  api_video_sharpness(void *unused, onion_request *req, o
 {
 	API_UNIMPLEMENTED
 }
+
+onion_connection_status  api_video_white_balance(void *unused, onion_request *req, onion_response *res)
+{
+    API_UNIMPLEMENTED
+}
+

@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	platform_init_video();
 	platform_open_hdmi();
 
-	// Libonion test
+	// Libonion init
 	onion *o = onion_new(O_ONE_LOOP);
 	onion_url *url = onion_root_url(o);
 
@@ -66,6 +66,7 @@ int main(int argc, char *argv[])
 	onion_url_add(url, "video/game_mode", api_video_game_mode);
 	onion_url_add(url, "video/gamma", api_video_gamma);
 	onion_url_add(url, "video/hue", api_video_hue);
+	onion_url_add(url, "video/white_balance", api_video_white_balance);
 	onion_url_add(url, "video/noise_reduction", api_video_noise_reduction);
 	onion_url_add(url, "video/saturation", api_video_saturation);
 	onion_url_add(url, "video/sharpness", api_video_sharpness);

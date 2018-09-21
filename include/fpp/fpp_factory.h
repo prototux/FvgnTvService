@@ -11,6 +11,15 @@ enum fpp_watchdog_operation {
 	WATCHDOG_RESET /**< Reset the watchdog counter */
 };
 
+struct fpp_factory_wb {
+	uint16_t r_gain; /**< Red gain */
+	uint16_t g_gain; /**< Green gain */
+	uint16_t b_gain; /**< Blue gain */
+	uint16_t r_offset; /**< Red offset */
+	uint16_t g_offset; /**< Green offset */
+	uint16_t b_offset; /**< Blue offset */
+};
+
 /**
  * fpp_factory_close_mode_uart is not documented yet.
  */
@@ -57,9 +66,10 @@ void fpp_factory_set_auto_adc(void);
 void fpp_factory_set_ssc(void);
 
 /**
- * fpp_factory_set_white_balance is not documented yet.
+ * @brief Set white balance (should be in fpp_video?)
+ * @param params Parameters structure
  */
-void fpp_factory_set_white_balance(void);
+int fpp_factory_set_white_balance(struct fpp_factory_wb params);
 
 /**
  * fpp_factory_uart_operate is not documented yet.

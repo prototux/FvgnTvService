@@ -35,4 +35,6 @@ onion_connection_status  api_video_saturation(void *unused, onion_request *req, 
 
 onion_connection_status  api_video_sharpness(void *unused, onion_request *req, onion_response *res);
 
+onion_connection_status  api_video_white_balance(void *unused, onion_request *req, onion_response *res);
+
 #endif /* __API_VIDEO_H__ */
