@@ -6,18 +6,6 @@
 #define __FPP_ZOOM_H__
 
 #include <inttypes.h>
-/**
- * @brief the signal parameters
- */
-struct fpp_signal_format {
-	uint32_t format_id;
-	uint32_t width;
-	uint32_t height;
-	uint8_t color_space;
-	uint8_t dvi;
-	uint8_t framerate;
-	uint8_t interlaced;
-};
 
 /**
  * fpp_zoom_get_afd_info is not documented yet.

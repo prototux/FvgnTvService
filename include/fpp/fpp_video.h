@@ -87,7 +87,7 @@ void fpp_video_mute(int mute);
  * @param unknown Unknown, set to 1 when called from sita, 0 from libfpp
  * @param adj A video adjustement struct that contains the values, low and high are ignored.
  */
-void fpp_video_set_brightness(uint8_t unknown, struct fpp_video_adj adj);
+int fpp_video_set_brightness(uint8_t unknown, struct fpp_video_adj adj);
 
 /**
  * fpp_video_set_color_param is not documented yet.

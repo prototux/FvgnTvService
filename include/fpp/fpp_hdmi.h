@@ -8,7 +8,7 @@
 /**
  * fpp_hdmi_process_signal_formatchange is not documented yet.
  */
-void fpp_hdmi_process_signal_formatchange(void);
+//void fpp_hdmi_process_signal_formatchange(void);
 
 /**
  * fpp_hdmi_process_signal_locked is not documented yet.

@@ -73,6 +73,76 @@ void platform_init_video(void)
 	platform_video_set_hue(50);
 	platform_video_set_saturation(50);
 	platform_video_set_sharpness(100);
+	platform_video_set_backlight(100);
+	platform_video_set_gamma(100);
+	platform_video_set_white_balance(135, 128, 128, 128, 118, 128);
+
+	// Disabled options
+	platform_video_set_gamma(1);
+	platform_video_enable_film_mode(0);
+	platform_video_set_black_stretch(3);
+	platform_video_set_noise_reduction(4);
+	platform_video_enable_flesh_tone(0);
+	platform_video_enable_game_mode(0);
+}
+
+void platform_test_callback(void)
+{
+	printf("==> Got signal change!\n");
+	platform_video_mute(1);
+	// test things
+	uint32_t id, w, h, fr, il;
+	struct test_format {
+		uint16_t w;
+		uint16_t h;
+		uint16_t framerate;
+		uint8_t interlaced;
+		uint8_t reserved[3];
+	};
+	struct test_format format;
+	fpp_signal_get_format(LINEIN_HDMI3, &id, &format);
+	//fpp_signal_get_video_size(LINEIN_HDMI3, 0, &w, &h);
+	printf("format: id=%d w=%d h=%d test=%d\n", id, format.w, format.h, format.framerate);
+	//printf("Reso: %dx%d\n", w, h);
+
+	//inutile xvycc + film framretate info? fpp_signal_get_info
+	//inutile? fpp_signal_get_color_space
+	//fpp_signal_get_frequency // seulement analog
+	//inutile ?fpp_signal_get_sound_system
+	//fpp_signal_get_hdmi_provider_type // auto-pc-video-max
+	//fpp_signal_get_color_system // ??
+	//fpp_signal_is_dvi // ??
+	//fpp_signal_is_interlaced // ??
+	int color_space = 0;
+	fpp_signal_get_color_space(LINEIN_HDMI3, 0, &color_space);
+	printf("color space: %d\n", color_space);
+
+	//int disp_fr = 42;
+	//fpp_signal_get_disp_framerate(&disp_fr);
+	//printf("Display framerate %d\n", disp_fr);
+
+	//int hdmi_type = 42;
+	//fpp_signal_get_hdmi_provider_type(&hdmi_type);
+	//printf("provider: %d\n", hdmi_type);
+	//fpp_signal_set_hdmi_provider_type(0);
+
+
+	//test set new size
+	struct fpp_signal_format new_format = {
+		.format_id = 0,
+		.width = format.w,
+		.height = format.h,
+		.color_space = color_space,
+		.dvi = 1,
+		.framerate = 60,
+		.interlaced = format.interlaced
+	};
+	fpp_hdmi_process_signal_formatchange(LINEIN_HDMI3, format);
+	fpp_zoom_set_crop_window(LINEIN_HDMI3, &new_format, 0, 0, format.w, format.h);
+	fpp_zoom_set_display_window(LINEIN_HDMI3, &new_format, 0, 0, 1920, 1080);
+	usleep(100000);
+	platform_video_mute(0);
+	return 0;
 }
 
 void platform_open_hdmi(void)
@@ -104,5 +174,15 @@ void platform_open_hdmi(void)
     fpp_graphics_mute(1);
     fpp_power_set_backlight(1);
 	usleep(400000);
-}
 
+
+	// Test
+	printf("insert? %d\n", platform_input_get_status(LINEIN_HDMI3));
+	printf("framerate: %d\n", platform_input_get_framerate(LINEIN_HDMI3));
+	// uninit?
+	fpp_signal_monitor_exinit();
+	// linein
+	fpp_signal_monitor_init(LINEIN_HDMI3);
+	// linein, enable?, callbackfunc
+	fpp_signal_monitor_formatchange(LINEIN_HDMI3, 1, platform_test_callback);
+}

@@ -177,6 +177,6 @@ void fpp_linein_open_svideo(void);
 /**
  * fpp_linein_src_insert_check is not documented yet.
  */
-void fpp_linein_src_insert_check(void);
+//void fpp_linein_src_insert_check(void);
 
 #endif /* __FPP_LINEIN_H__ */

@@ -69,7 +69,7 @@ void fpp_factory_set_ssc(void);
  * @brief Set white balance (should be in fpp_video?)
  * @param params Parameters structure
  */
-int fpp_factory_set_white_balance(struct fpp_factory_wb params);
+int fpp_factory_set_white_balance(struct fpp_factory_wb *params);
 
 /**
  * fpp_factory_uart_operate is not documented yet.

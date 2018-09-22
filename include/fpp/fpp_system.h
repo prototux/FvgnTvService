@@ -21,12 +21,12 @@ void fpp_system_debug_key_set(void);
 /**
  * fpp_system_enter_4k2k_mode is not documented yet.
  */
-void fpp_system_enter_4k2k_mode(void);
+//void fpp_system_enter_4k2k_mode(void);
 
 /**
  * fpp_system_exit_4k2k_mode is not documented yet.
  */
-void fpp_system_exit_4k2k_mode(void);
+//void fpp_system_exit_4k2k_mode(void);
 
 /**
  * fpp_system_fast_create_file is not documented yet.
