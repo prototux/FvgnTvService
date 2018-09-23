@@ -125,7 +125,7 @@ void fpp_signal_monitor_afd_change(void);
 /**
  * fpp_signal_monitor_lock is not documented yet.
  */
-void fpp_signal_monitor_lock(void);
+//void fpp_signal_monitor_lock(void);
 
 /**
  * fpp_signal_monitor_scart_change is not documented yet.
@@ -140,7 +140,7 @@ void fpp_signal_monitor_src_insert(void);
 /**
  * fpp_signal_monitor_unlock is not documented yet.
  */
-void fpp_signal_monitor_unlock(void);
+//void fpp_signal_monitor_unlock(void);
 
 /**
  * fpp_signal_monitor_wss_change is not documented yet.

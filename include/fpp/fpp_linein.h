@@ -96,7 +96,7 @@ void fpp_linein_close_dtv(void);
 /**
  * fpp_linein_close_hdmi is not documented yet.
  */
-void fpp_linein_close_hdmi(void);
+//void fpp_linein_close_hdmi(void);
 
 /**
  * fpp_linein_close_ktv is not documented yet.

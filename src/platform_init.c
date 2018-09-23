@@ -87,69 +87,14 @@ void platform_init_video(void)
 	platform_video_enable_game_mode(0);
 }
 
-void platform_formatchange(void)
-{
-	platform_video_mute(1);
-
-	// Platform?
-	uint32_t new_id;
-	struct fpp_signal_format_short new_format_short;
-	fpp_signal_get_format(LINEIN_HDMI3, &new_id, &new_format_short);
-
-	// platform?
-	uint32_t new_color_space = 0;
-	fpp_signal_get_color_space(LINEIN_HDMI3, 0, &new_color_space);
-
-	// Set new format
-	struct fpp_signal_format new_format = {
-		.format_id = new_id,
-		.width = new_format_short.width,
-		.height = new_format_short.height,
-		.color_space = new_color_space,
-		.dvi = 0,
-		.framerate = new_format_short.framerate,
-		.interlaced = new_format_short.interlaced
-	};
-	fpp_hdmi_process_signal_formatchange(LINEIN_HDMI3, new_format);
-	fpp_zoom_set_crop_window(LINEIN_HDMI3, &new_format, 0, 0, new_format.width, new_format.height);
-	fpp_zoom_set_display_window(LINEIN_HDMI3, &new_format, 0, 0, 1920, 1080);
-	usleep(100000);
-	platform_video_mute(0);
-	return 0;
-}
-
 void platform_open_hdmi(void)
 {
-    struct fpp_signal_format sig_format = {
-        .format_id = 1,
-        .width = 1920,
-        .height = 1080,
-        .color_space = 1,
-        .dvi = 1,
-        .framerate = 60,
-        .interlaced = 0
-    };
-
-	// Hardcoded to hdmi3 for tests
-	int current_linein = LINEIN_HDMI3;
-
-	// Open the HDMI input and wait some time
-	fpp_linein_open_hdmi(current_linein);
-	usleep(300000);
-
-	// Set the input window
-	fpp_zoom_set_crop_window(current_linein, &sig_format, 0,0, 1920, 1080);
-	fpp_zoom_set_display_window(current_linein, &sig_format, 0,0, 1920, 1080);
+	// Switch to HDMI3 for test
+	platform_input_switch_to(LINEIN_HDMI3);
 
     // Turn on panel, unmute video, mute graphics
     fpp_panel_power_on_off(1);
-    fpp_video_mute(0);
     fpp_graphics_mute(1);
     fpp_power_set_backlight(1);
 	usleep(400000);
-
-	// Add callback to trigger when the input format change
-	fpp_signal_monitor_exinit();
-	fpp_signal_monitor_init(LINEIN_HDMI3);
-	fpp_signal_monitor_formatchange(LINEIN_HDMI3, 1, platform_formatchange);
 }
