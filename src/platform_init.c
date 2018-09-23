@@ -78,67 +78,40 @@ void platform_init_video(void)
 	platform_video_set_white_balance(135, 128, 128, 128, 118, 128);
 
 	// Disabled options
-	platform_video_set_gamma(1);
 	platform_video_enable_film_mode(0);
-	platform_video_set_black_stretch(3);
-	platform_video_set_noise_reduction(4);
+	// That one trigger a segfault, why?
+	//platform_video_dynamic_contrast(0);
+	platform_video_set_black_stretch(0);
+	platform_video_set_noise_reduction(0);
 	platform_video_enable_flesh_tone(0);
 	platform_video_enable_game_mode(0);
 }
 
-void platform_test_callback(void)
+void platform_formatchange(void)
 {
-	printf("==> Got signal change!\n");
 	platform_video_mute(1);
-	// test things
-	uint32_t id, w, h, fr, il;
-	struct test_format {
-		uint16_t w;
-		uint16_t h;
-		uint16_t framerate;
-		uint8_t interlaced;
-		uint8_t reserved[3];
-	};
-	struct test_format format;
-	fpp_signal_get_format(LINEIN_HDMI3, &id, &format);
-	//fpp_signal_get_video_size(LINEIN_HDMI3, 0, &w, &h);
-	printf("format: id=%d w=%d h=%d test=%d\n", id, format.w, format.h, format.framerate);
-	//printf("Reso: %dx%d\n", w, h);
 
-	//inutile xvycc + film framretate info? fpp_signal_get_info
-	//inutile? fpp_signal_get_color_space
-	//fpp_signal_get_frequency // seulement analog
-	//inutile ?fpp_signal_get_sound_system
-	//fpp_signal_get_hdmi_provider_type // auto-pc-video-max
-	//fpp_signal_get_color_system // ??
-	//fpp_signal_is_dvi // ??
-	//fpp_signal_is_interlaced // ??
-	int color_space = 0;
-	fpp_signal_get_color_space(LINEIN_HDMI3, 0, &color_space);
-	printf("color space: %d\n", color_space);
+	// Platform?
+	uint32_t new_id;
+	struct fpp_signal_format_short new_format_short;
+	fpp_signal_get_format(LINEIN_HDMI3, &new_id, &new_format_short);
 
-	//int disp_fr = 42;
-	//fpp_signal_get_disp_framerate(&disp_fr);
-	//printf("Display framerate %d\n", disp_fr);
+	// platform?
+	uint32_t new_color_space = 0;
+	fpp_signal_get_color_space(LINEIN_HDMI3, 0, &new_color_space);
 
-	//int hdmi_type = 42;
-	//fpp_signal_get_hdmi_provider_type(&hdmi_type);
-	//printf("provider: %d\n", hdmi_type);
-	//fpp_signal_set_hdmi_provider_type(0);
-
-
-	//test set new size
+	// Set new format
 	struct fpp_signal_format new_format = {
-		.format_id = 0,
-		.width = format.w,
-		.height = format.h,
-		.color_space = color_space,
-		.dvi = 1,
-		.framerate = 60,
-		.interlaced = format.interlaced
+		.format_id = new_id,
+		.width = new_format_short.width,
+		.height = new_format_short.height,
+		.color_space = new_color_space,
+		.dvi = 0,
+		.framerate = new_format_short.framerate,
+		.interlaced = new_format_short.interlaced
 	};
-	fpp_hdmi_process_signal_formatchange(LINEIN_HDMI3, format);
-	fpp_zoom_set_crop_window(LINEIN_HDMI3, &new_format, 0, 0, format.w, format.h);
+	fpp_hdmi_process_signal_formatchange(LINEIN_HDMI3, new_format);
+	fpp_zoom_set_crop_window(LINEIN_HDMI3, &new_format, 0, 0, new_format.width, new_format.height);
 	fpp_zoom_set_display_window(LINEIN_HDMI3, &new_format, 0, 0, 1920, 1080);
 	usleep(100000);
 	platform_video_mute(0);
@@ -175,14 +148,8 @@ void platform_open_hdmi(void)
     fpp_power_set_backlight(1);
 	usleep(400000);
 
-
-	// Test
-	printf("insert? %d\n", platform_input_get_status(LINEIN_HDMI3));
-	printf("framerate: %d\n", platform_input_get_framerate(LINEIN_HDMI3));
-	// uninit?
+	// Add callback to trigger when the input format change
 	fpp_signal_monitor_exinit();
-	// linein
 	fpp_signal_monitor_init(LINEIN_HDMI3);
-	// linein, enable?, callbackfunc
-	fpp_signal_monitor_formatchange(LINEIN_HDMI3, 1, platform_test_callback);
+	fpp_signal_monitor_formatchange(LINEIN_HDMI3, 1, platform_formatchange);
 }

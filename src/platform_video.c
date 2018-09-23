@@ -11,6 +11,13 @@ uint8_t platform_video_contrast = 0;
 uint8_t platform_video_saturation = 0;
 uint8_t platform_video_hue = 0;
 uint8_t platform_video_sharpness = 0;
+uint8_t platform_video_backlight = 0;
+uint8_t platform_video_gamma = 0;
+uint8_t platform_video_muted = 0;
+uint8_t platform_video_dynamic_contrast = 0;
+uint8_t platform_video_current_film_mode = 0;
+uint8_t platform_video_current_game_mode = 0;
+uint8_t platform_video_current_flesh_tone = 0;
 
 enum mpeg_noise_reduction {mpeg_nr_off, mpeg_nr_low, mpeg_nr_mid, mpeg_nr_high, mpeg_nr_num };
 enum color_param  {color_normal, color_enhance_wide, color_xvycc, color_bypass = 255, color_max };
@@ -32,12 +39,7 @@ int platform_video_set_brightness(uint8_t value)
 
 	// Create the video_adj struct
 	struct fpp_video_adj adj = {.value=value, .min=min, .low=0, .mid=mid, .high=0, .max=max};
-	if (!fpp_video_set_brightness(1, adj))
-	{
-		printf("ERROR: fpp_video_set_brightness returned an error\n");
-		return E_FPPRET;
-	}
-
+	fpp_video_set_brightness(1, adj);
 	platform_video_brightness = value;
 	return 0;
 }
@@ -137,7 +139,8 @@ int platform_video_set_mute_color(uint8_t red, uint8_t green, uint8_t blue)
 int platform_video_mute(uint8_t muted)
 {
 	fpp_video_mute(muted);
-	return 1;
+	platform_video_muted = muted;
+	return 0;
 }
 
 // (un)freeze video
@@ -163,6 +166,7 @@ int platform_video_set_backlight(uint8_t value)
 
 	struct fpp_video_adj adj = {.value=value, .min=min, .low=0, .mid=mid, .high=0, .max=max};
 	fpp_video_set_background_light(adj);
+	platform_video_backlight = value;
 	return 1;
 }
 
@@ -236,6 +240,15 @@ int platform_video_set_color_param(enum color_param param)
 	fpp_video_set_color_param(param);
 }
 
+void platform_get_video_size(uint8_t linein, uint16_t *width, uint16_t *height)
+{   
+    fpp_signal_get_video_size(linein, 0, width, height);
+}
+
+void platform_get_framerate(uint8_t *framerate)
+{   
+    fpp_signal_get_disp_framerate(framerate);
+}
 // Set white balance/RGB params (TODO: more testing)
 // Currently segfaults
 int platform_video_set_white_balance(uint16_t r_gain, uint16_t r_offset, uint16_t g_gain, uint16_t g_offset, uint16_t b_gain, uint16_t b_offset)
@@ -266,12 +279,7 @@ int platform_video_set_white_balance(uint16_t r_gain, uint16_t r_offset, uint16_
 	return 0;
 }
 
-void platform_get_video_size(uint8_t linein, uint16_t *width, uint16_t *height)
-{
-	fpp_signal_get_video_size(linein, 0, width, height);
-}
-
-void platform_get_framerate(uint8_t *framerate)
+void platform_video_get_framerate(uint8_t *framerate)
 {
 	fpp_signal_get_disp_framerate(framerate);
 }

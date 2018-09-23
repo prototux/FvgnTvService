@@ -6,26 +6,55 @@
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-	<label for="tvip">TV IP</label><input type="text" name="tvip" id="tvip" />
-
-
-	<label for="brightness">Brightness (<span id="brightness-now"></span>)</label>
-	<input type="range" id="brightness" name="brightness" min="0" max="100" />
+	<label for="tvip">TV IP</label><input type="text" name="tvip" id="tvip" /> <br />
 
 <script>
-$("#brightness").change(function () {
-	var value = $(this).val()
-	$("#brightness-now").text(value)
-	$.ajax({
-		url: 'http://'+$('#tvip').val()+':8080/video/brightness',
-		type: 'POST',
-		data: JSON.stringify({"value": value}),
-		dataType: 'json',
-		contentType: false,
-		crossDomain: true
-	})
-  })
-  .change();
+	function trigger_linear_value(type, max) {
+		$("body").append('<label for="'+type+'">'+type+' (<span id="'+type+'-now"></span>)</label>')
+		$("body").append('<input type="range" id="'+type+'" name="'+type+'" min="0" max="'+max+'" /><br />')
+		$("#"+type).change(function () {
+			var value = $(this).val()
+			$("#"+type+"-now").text(value)
+			$.ajax({
+				url: 'http://'+$('#tvip').val()+':8080/video/'+type,
+				type: 'POST',
+				data: JSON.stringify({"value": value}),
+				dataType: 'json',
+				contentType: false,
+				crossDomain: true
+			})
+		})
+	}
+
+	function trigger_bool_value(type) {
+		$("body").append('<label for="'+type+'">'+type+' (<span id="'+type+'-now"></span>)</label>')
+		$("body").append('<input type="checkbox" id="'+type+'" name="'+type+'" /><br />')
+		$("#"+type).change(function () {
+			var value = $(this).is(':checked')
+			$("#"+type+"-now").text(value)
+			$.ajax({
+				url: 'http://'+$('#tvip').val()+':8080/video/'+type,
+				type: 'POST',
+				data: JSON.stringify({"enabled": (value)?1:0}),
+				dataType: 'json',
+				contentType: false,
+				crossDomain: true
+			})
+		})
+	}
+
+	trigger_linear_value("brightness", 100)
+	trigger_linear_value("backlight", 100)
+	trigger_linear_value("contrast", 100)
+	trigger_linear_value("gamma", 6)
+	trigger_linear_value("hue", 100)
+	trigger_linear_value("saturation", 100)
+	trigger_linear_value("sharpness", 100)
+	trigger_bool_value("mute")
+	trigger_bool_value("dynamic_contrast")
+	trigger_bool_value("film_mode")
+	trigger_bool_value("flesh_tone")
+	trigger_bool_value("game_mode")
 </script>
 </body>
 </html>
