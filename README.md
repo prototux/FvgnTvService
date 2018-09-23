@@ -36,15 +36,15 @@ It is a very early project, so don't expect any usuable binary soon.
 
 | Feature                  | sita vs fvgn | Status |
 | ------------------------ | ------------ | ------ |
-| Power on sequence        | sita + fvgn  | wip    |
-| Input selection          | sita + fvgn  | todo   |
+| Power on sequence        | sita + fvgn  | ok     |
+| Input selection          | sita + fvgn  | wip    |
 | TV Channel selection     | sita only    |        |
 | Teletext + subtitles     | sita only    |        |
 | MHEG5 and HbbTV          | sita only    |        |
 | HDCP2                    | sita only    |        |
-| Video parameters         | sita + fvgn  | wip    |
+| Video parameters         | sita + fvgn  | ok     |
 | IR Remote control        | sita only    |        |
-| API remote control       | fvgn only    | todo   |
+| API remote control       | fvgn only    | wip    |
 | 3D mode                  | sita only    |        |
 | OSD Ui                   | sita only    |        |
 | OSD notifications        | fvgn only    | todo   |
