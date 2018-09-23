@@ -97,4 +97,11 @@ void platform_open_hdmi(void)
     fpp_graphics_mute(1);
     fpp_power_set_backlight(1);
 	usleep(400000);
+
+	usleep(4000000);
+	printf("OFF\n");
+	platform_power_fakeoff(1);
+	usleep(4000000);
+	printf("ON\n");
+	platform_power_fakeoff(0);
 }
