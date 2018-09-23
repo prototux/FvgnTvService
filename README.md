@@ -37,7 +37,7 @@ It is a very early project, so don't expect any usuable binary soon.
 | Feature                  | sita vs fvgn | Status |
 | ------------------------ | ------------ | ------ |
 | Power on sequence        | sita + fvgn  | ok     |
-| Input selection          | sita + fvgn  | wip    |
+| Input selection          | sita + fvgn  | ok     |
 | TV Channel selection     | sita only    |        |
 | Teletext + subtitles     | sita only    |        |
 | MHEG5 and HbbTV          | sita only    |        |
@@ -48,7 +48,7 @@ It is a very early project, so don't expect any usuable binary soon.
 | 3D mode                  | sita only    |        |
 | OSD Ui                   | sita only    |        |
 | OSD notifications        | fvgn only    | todo   |
-| FakeOff mode             | fvgn only    | wip    |
+| FakeOff mode             | fvgn only    | ok     |
 | Audio control            | sita + fvgn  | todo   |
 | Smart TV apps            | sita only    |        |
 | TV recording/PVR         | sita only    |        |
