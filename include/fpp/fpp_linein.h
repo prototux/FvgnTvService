@@ -65,118 +65,140 @@ enum fpp_linein {
 
 /**
  * fpp_linein_atv_play is not documented yet.
+ * unused, we don't support TV
  */
-void fpp_linein_atv_play(void);
+//void fpp_linein_atv_play(void);
 
 /**
  * fpp_linein_atv_stop is not documented yet.
+ * unused, we don't support TV
  */
-void fpp_linein_atv_stop(void);
+//void fpp_linein_atv_stop(void);
 
 /**
  * fpp_linein_close_atv is not documented yet.
+ * unused, we don't support TV
  */
-void fpp_linein_close_atv(void);
+//void fpp_linein_close_atv(void);
 
 /**
- * fpp_linein_close_component is not documented yet.
+ * @brief Close a component linein
+ * @param linein the linein to close
  */
-void fpp_linein_close_component(void);
+void fpp_linein_close_component(uint32_t linein);
 
 /**
- * fpp_linein_close_cvbs is not documented yet.
+ * @brief Close a composite/S-Video linein
+ * @param linein the linein to close
  */
-void fpp_linein_close_cvbs(void);
+void fpp_linein_close_cvbs(uint32_t linein);
 
 /**
  * fpp_linein_close_dtv is not documented yet.
+ * unused, we don't support TV
  */
-void fpp_linein_close_dtv(void);
+//void fpp_linein_close_dtv(void);
 
 /**
- * fpp_linein_close_hdmi is not documented yet.
+ * @brief Close a HDMI linein
+ * @param linein the linein to close
  */
-//void fpp_linein_close_hdmi(void);
+void fpp_linein_close_hdmi(uint32_t linein);
 
 /**
  * fpp_linein_close_ktv is not documented yet.
+ * unused, we don't support TV
  */
-void fpp_linein_close_ktv(void);
+//void fpp_linein_close_ktv(void);
 
 /**
- * fpp_linein_close_pc is not documented yet.
+ * @brief Close a PC (VGA) linein
+ * @param linein the linein to close
  */
-void fpp_linein_close_pc(void);
+void fpp_linein_close_pc(uint32_t linein);
 
 /**
- * fpp_linein_close_scart is not documented yet.
+ * @brief Close a SCART/Pertitel linein
+ * @param linein the linein to close
  */
-void fpp_linein_close_scart(void);
+void fpp_linein_close_scart(uint32_t linein);
 
 /**
- * fpp_linein_close_storage is not documented yet.
+ * @brief Close storage linein
+ * unused, we don't support storage
  */
-void fpp_linein_close_storage(void);
+//void fpp_linein_close_storage(void);
 
 /**
- * fpp_linein_close_svideo is not documented yet.
+ * @brief Close a S-Video linein
+ * unused, svideo is CVBS
  */
-void fpp_linein_close_svideo(void);
+//void fpp_linein_close_svideo(void);
 
 /**
- * fpp_linein_open_atv is not documented yet.
+ * @brief Open analog TV linein
+ * unused, we don't support TV
  */
-void fpp_linein_open_atv(void);
+//void fpp_linein_open_atv(void);
 
 /**
- * fpp_linein_open_component is not documented yet.
+ * @brief Open compoennt linein
+ * @param linein the linein to open
  */
-void fpp_linein_open_component(void);
+void fpp_linein_open_component(uint32_t linein);
 
 /**
- * fpp_linein_open_cvbs is not documented yet.
+ * @brief Open composite/S-Video linein
+ * @param linein the linein to open
  */
-void fpp_linein_open_cvbs(void);
+void fpp_linein_open_cvbs(uint32_t linein);
 
 /**
- * fpp_linein_open_dtv is not documented yet.
+ * @brief Open digital TV linein
  */
-void fpp_linein_open_dtv(void);
+//void fpp_linein_open_dtv(void);
 
 /**
  * @brief Opens an HDMI port
- * @param linein The port to open
+ * @param linein the linein to open
  */
 void fpp_linein_open_hdmi(uint32_t linein);
 
 /**
  * fpp_linein_open_ktv is not documented yet.
+ * unused, we don't support TV
  */
-void fpp_linein_open_ktv(void);
+//void fpp_linein_open_ktv(void);
 
 /**
- * fpp_linein_open_pc is not documented yet.
+ * @brief Open PC (VGA) linein
+ * @param linein the linein to open
  */
-void fpp_linein_open_pc(void);
+void fpp_linein_open_pc(uint32_t linein);
 
 /**
- * fpp_linein_open_scart is not documented yet.
+ * @brief Open SCART/Peritel linein
+ * @param linein the linein to open
  */
-void fpp_linein_open_scart(void);
+void fpp_linein_open_scart(uint32_t linein);
 
 /**
  * fpp_linein_open_storage is not documented yet.
+ * unused, we don't support TV
  */
-void fpp_linein_open_storage(void);
+//void fpp_linein_open_storage(void);
 
 /**
  * fpp_linein_open_svideo is not documented yet.
+ * unused, S-Video is CVBS
  */
-void fpp_linein_open_svideo(void);
+//void fpp_linein_open_svideo(void);
 
 /**
- * fpp_linein_src_insert_check is not documented yet.
+ * @brief Check if a linein is plugged
+ * @param linein linein to check from
+ * @param status where to write the status (plugged/unplugged) to
  */
-//void fpp_linein_src_insert_check(void);
+//void fpp_linein_src_insert_check(uint32_t linein, uint8_t status);
 
 #endif /* __FPP_LINEIN_H__ */

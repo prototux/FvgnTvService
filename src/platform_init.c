@@ -64,33 +64,17 @@ void platform_init()
 
 	// Disable the watchdog
 	fpp_factory_watch_dog_operate(WATCHDOG_DISABLE);
-}
 
-void platform_init_video(void)
-{
-	platform_video_set_brightness(90);
-	platform_video_set_contrast(80);
-	platform_video_set_hue(50);
-	platform_video_set_saturation(50);
-	platform_video_set_sharpness(100);
-	platform_video_set_backlight(100);
-	platform_video_set_gamma(100);
-	platform_video_set_white_balance(135, 128, 128, 128, 118, 128);
-
-	// Disabled options
-	platform_video_enable_film_mode(0);
-	// That one trigger a segfault, why?
-	//platform_video_dynamic_contrast(0);
-	platform_video_set_black_stretch(0);
-	platform_video_set_noise_reduction(0);
-	platform_video_enable_flesh_tone(0);
-	platform_video_enable_game_mode(0);
+	// Wait a bit for it to be really init
+	usleep(400000);
 }
 
 void platform_open_hdmi(void)
 {
 	// Switch to HDMI3 for test
+	printf("Switch to hdmi3\n");
 	platform_input_switch_to(LINEIN_HDMI3);
+	printf("Done switching\n");
 
     // Turn on panel, unmute video, mute graphics
     fpp_panel_power_on_off(1);

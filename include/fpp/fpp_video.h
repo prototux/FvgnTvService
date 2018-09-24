@@ -21,6 +21,68 @@ struct fpp_video_adj {
 };
 
 /**
+ * @brief MPEG noise reduction level
+ */
+enum fpp_mpeg_noise_reduction {
+	mpeg_nr_off,
+	mpeg_nr_low,
+	mpeg_nr_mid,
+	mpeg_nr_high,
+	mprg_nr_num
+};
+
+/**
+ * @brief Black stretch level (still to confirm)
+ */
+enum fpp_black_stretch {
+	stretch_off,
+	stretch_dark,
+	stretch_darker,
+	stretch_darkest
+};
+
+/**
+ * @brief Noise reduction level (still to confirm)
+ */
+enum fpp_noise_reduction {
+	nr_off,
+	nr_low,
+	nr_mid,
+	nr_high,
+	nr_auto
+};
+
+/**
+ * @brief Color space setting (still to confirm)
+ */
+enum fpp_color_space {
+	color_space_auto,
+	color_space_native,
+	color_space_custom
+};
+
+/**
+ * @brief Color warmth setting (still to confirm)
+ */
+enum fpp_color_warmth {
+	color_warmth_cold,
+	color_warmth_standard,
+	color_warmth_warm,
+	color_warmth_custom
+};
+
+/**
+ * @brief Color parameter (preset?)
+ */
+enum fpp_color_param {
+	EN_VIDEO_COLOR_NORMAL,
+	EN_VIDEO_COLOR_ENHANCE_WIDE,
+	EN_VIDEO_COLOR_XVYCC,
+	EN_VIDEO_COLOR_BYPASS = 255,
+	EN_VIDEO_COLOR_MAX
+};
+
+/**
  * fpp_video_decode_getPts is not documented yet.
  */
 //void fpp_video_decode_getPts(void);

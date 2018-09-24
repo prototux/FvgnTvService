@@ -8,7 +8,7 @@
 /**
  * fpp_board_get_soft_svn_info is not documented yet.
  */
-void fpp_board_get_soft_svn_info(void);
+//void fpp_board_get_soft_svn_info(void);
 
 /**
  * @brief Inits the IC (scaler chip?)

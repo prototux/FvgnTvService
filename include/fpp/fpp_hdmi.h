@@ -13,11 +13,11 @@
 /**
  * fpp_hdmi_process_signal_locked is not documented yet.
  */
-void fpp_hdmi_process_signal_locked(void);
+//void fpp_hdmi_process_signal_locked(void);
 
 /**
  * fpp_hdmi_process_signal_unlock is not documented yet.
  */
-void fpp_hdmi_process_signal_unlock(void);
+//void fpp_hdmi_process_signal_unlock(void);
 
 #endif /* __FPP_HDMI_H__ */

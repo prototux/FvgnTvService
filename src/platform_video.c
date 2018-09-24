@@ -19,9 +19,6 @@ uint8_t platform_video_current_film_mode = 0;
 uint8_t platform_video_current_game_mode = 0;
 uint8_t platform_video_current_flesh_tone = 0;
 
-enum mpeg_noise_reduction {mpeg_nr_off, mpeg_nr_low, mpeg_nr_mid, mpeg_nr_high, mpeg_nr_num };
-enum color_param  {color_normal, color_enhance_wide, color_xvycc, color_bypass = 255, color_max };
-
 // Set brightness
 int platform_video_set_brightness(uint8_t value)
 {
@@ -205,7 +202,7 @@ int platform_video_enable_dynamic_contrast(uint8_t enabled)
 
 // Set MPEG noise reduction (TODO: more testing)
 // Should reduce the MPEG compression noise
-int platform_video_set_mpeg_noise_reduction(enum mpeg_noise_reduction level)
+int platform_video_set_mpeg_noise_reduction(enum fpp_mpeg_noise_reduction level)
 {
 	fpp_video_set_mpeg_nr(level);
 }
@@ -235,7 +232,7 @@ int platform_video_enable_game_mode(uint8_t enabled)
 }
 
 // Set color mode (TODO: more testing)
-int platform_video_set_color_param(enum color_param param)
+int platform_video_set_color_param(enum fpp_color_param param)
 {
 	fpp_video_set_color_param(param);
 }
@@ -282,6 +279,13 @@ int platform_video_set_white_balance(uint16_t r_gain, uint16_t r_offset, uint16_
 void platform_video_get_framerate(uint8_t *framerate)
 {
 	fpp_signal_get_disp_framerate(framerate);
+}
+
+uint8_t platform_video_get_blackfield_status()
+{
+	uint8_t status;
+	fpp_video_get_black_field_status(&status);
+	return status;
 }
 
 // TODO: fpp_video_set_pq_algorithm

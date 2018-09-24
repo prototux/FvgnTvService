@@ -15,12 +15,13 @@ void fpp_zoom_get_afd_info(void);
 /**
  * fpp_zoom_get_vga_para is not documented yet.
  */
-void fpp_zoom_get_vga_para(void);
+//void fpp_zoom_get_vga_para(void);
 
 /**
  * fpp_zoom_set_aspect_ratio is not documented yet.
+ * 1 in a specific case (E_AR_PANORAMA), else 0, so... 0
  */
-void fpp_zoom_set_aspect_ratio(void);
+void fpp_zoom_set_aspect_ratio(uint8_t aspect_ratio);
 
 /**
  * @brief Sets the crop parameters of a specific linein

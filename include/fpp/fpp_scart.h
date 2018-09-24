@@ -73,16 +73,16 @@ void fpp_scart_out_set_wss(void);
 /**
  * fpp_scart_process_signal_formatchange is not documented yet.
  */
-void fpp_scart_process_signal_formatchange(void);
+//void fpp_scart_process_signal_formatchange(void);
 
 /**
  * fpp_scart_process_signal_locked is not documented yet.
  */
-void fpp_scart_process_signal_locked(void);
+//void fpp_scart_process_signal_locked(void);
 
 /**
  * fpp_scart_process_signal_unlock is not documented yet.
  */
-void fpp_scart_process_signal_unlock(void);
+//void fpp_scart_process_signal_unlock(void);
 
 #endif /* __FPP_SCART_H__ */

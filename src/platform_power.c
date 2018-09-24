@@ -27,3 +27,29 @@ uint8_t platform_power_fakeoff(uint8_t enabled)
 	return 0;
 }
 
+void platform_power_poweroff()
+{
+	fpp_power_off(1);
+}
+
+uint8_t platform_power_get_led()
+{
+	// status: 0 off, 1 on, 2 breathing, 3 flashing ?
+	uint32_t status = 0;
+	fpp_power_get_led_status(2, &status);
+	printf("LED Status: %d\n", status);
+}
+
+// LED 0 (standby led) doesn't exist on my hardware...
+// So we only use LED 2 ("work" led)
+void platform_power_set_led(uint8_t status)
+{
+	fpp_power_set_led_status(2, status);
+}
+
+uint8_t platform_power_get_backlight()
+{
+	uint8_t enabled;
+	fpp_power_get_backlight(&enabled);
+	return enabled;
+}

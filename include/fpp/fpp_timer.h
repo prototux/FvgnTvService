@@ -8,6 +8,6 @@
 /**
  * fpp_timer_power_on_time is not documented yet.
  */
-void fpp_timer_power_on_time(void);
+//void fpp_timer_power_on_time(void);
 
 #endif /* __FPP_TIMER_H__ */

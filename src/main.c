@@ -20,8 +20,10 @@ int main(int argc, char *argv[])
 {
 	// Init FPP
 	platform_init();
-	platform_init_video();
 	platform_open_hdmi();
+	platform_power_set_led(0);
+	usleep(400000);
+	platform_power_poweroff();
 
 	// Libonion init
 	onion *o = onion_new(O_ONE_LOOP);
