@@ -8,19 +8,17 @@
 
 void platform_system_enter_4k2k_mode()
 {
-	uint8_t mode = 0; // 0=E_MODE_4K2K, 1=E_MODE_MAX
-	fpp_system_enter_4k2k_mode(mode);
+	fpp_system_enter_4k2k_mode(MODE_4K2K);
 }
 
 void platform_system_exit_4k2k_mode()
 {
-	uint8_t mode = 0; // 0=E_MODE_4K2K, 1=E_MODE_MAX
-	fpp_system_enter_4k2k_mode(mode);
+	fpp_system_enter_4k2k_mode(MODE_4K2K);
 }
 
-uint8_t platform_system_is_4k2k_mode()
+enum fpp_system_soc_mode platform_system_is_4k2k_mode()
 {
-	uint8_t mode = 0; //E_SOC_OUT_MODE_4K2K, E_SOC_OUT_MODE_NORMAL, E_SOC_OUT_MODE_MAX
+	enum fpp_system_soc_mode mode;
 	fpp_system_is_4k2k_mode(&mode);
 	return mode;
 }

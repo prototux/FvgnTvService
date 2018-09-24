@@ -14,19 +14,36 @@ struct fpp_resolution {
 };
 
 /**
+ * @brief 4k2k mode
+ */
+enum fpp_system_4k2k_mode {
+	MODE_4K2K,
+	MODE_MAX
+};
+
+/**
+ * @brief SoC mode
+ */
+enum fpp_system_soc_mode {
+	SOC_OUT_MODE_4K2K,
+	SOC_OUT_MODE_NORMAL,
+	SOC_OUT_MODE_MAX
+};
+
+/**
  * fpp_system_debug_key_set is not documented yet.
  */
 //void fpp_system_debug_key_set(void);
 
 /**
- * fpp_system_enter_4k2k_mode is not documented yet.
+ * @brief Enter SoC out 4k2k mode
  */
-//void fpp_system_enter_4k2k_mode(void);
+void fpp_system_enter_4k2k_mode(enum fpp_system_4k2k_mode mode);
 
 /**
- * fpp_system_exit_4k2k_mode is not documented yet.
+ * @brief Exit SoC out 4k2k mode
  */
-//void fpp_system_exit_4k2k_mode(void);
+void fpp_system_exit_4k2k_mode(enum fpp_system_4k2k_mode mode);
 
 /**
  * fpp_system_fast_create_file is not documented yet.
@@ -46,14 +63,17 @@ struct fpp_resolution {
 void fpp_system_fpp_debug_switch(int unknown_1, int unknown_2);
 
 /**
- * fpp_system_get_average_luma is not documented yet.
+ * @brief Get average luma
+ * @param luma where to write the luma to
  */
-//void fpp_system_get_average_luma(void);
+void fpp_system_get_average_luma(uint8_t *luma);
 
 /**
- * fpp_system_get_luma_level_distribution is not documented yet.
+ * @brief Get <size> samples of luma and store them to <results>
+ * @param results where to store the samples
+ * @size number of samples
  */
-//void fpp_system_get_luma_level_distribution(void);
+void fpp_system_get_luma_level_distribution(uint16_t *results, uint8_t size);
 
 /**
  * @brief Get the panel native resolution
@@ -79,9 +99,9 @@ void fpp_system_get_panel_resolution(struct fpp_resolution *resolution);
 void fpp_system_init(void);
 
 /**
- * fpp_system_is_4k2k_mode is not documented yet.
+ * @brief Get if SoC out is 4k2k or normal
  */
-//void fpp_system_is_4k2k_mode(void);
+void fpp_system_is_4k2k_mode(enum fpp_system_soc_mode *mode);
 
 /**
  * fpp_system_monitor_bluetooth is not documented yet.
@@ -106,9 +126,9 @@ void fpp_system_init(void);
 //void fpp_system_panel_set_bit_mode(void);
 
 /**
- * fpp_system_panel_set_osd_mirror is not documented yet.
+ * @brief Mirror (or not) the OSD
  */
-//void fpp_system_panel_set_osd_mirror(void);
+void fpp_system_panel_set_osd_mirror(uint8_t enabled);
 
 /**
  * fpp_system_panel_set_param_bool is not documented yet.
@@ -133,9 +153,9 @@ void fpp_system_init(void);
 //void fpp_system_panel_set_ti_mode(void);
 
 /**
- * fpp_system_panel_set_video_mirror is not documented yet.
+ * @brief Mirror (or not) the video
  */
-//void fpp_system_panel_set_video_mirror(void);
+void fpp_system_panel_set_video_mirror(uint8_t enabled);
 
 /**
  * fpp_system_pwm_set is not documented yet.

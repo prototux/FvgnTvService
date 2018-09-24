@@ -245,7 +245,7 @@ void fpp_signal_set_color_system(uint8_t reserved, enum fpp_color_system system)
  * @brief force a hdmi provider type for the current linein
  * @param type the provider type to force
  */
-void fpp_signal_set_hdmi_provider_type(enum fpp_hdmi_provider type);
+void fpp_signal_set_hdmi_provider_type(enum fpp_hdmi_provider_type type);
 
 /**
  * @brief force a sound system for the current linein
