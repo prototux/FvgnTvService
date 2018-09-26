@@ -35,9 +35,10 @@ void platform_power_poweroff()
 uint8_t platform_power_get_led()
 {
 	// status: 0 off, 1 on, 2 breathing, 3 flashing ?
-	uint32_t status = 0;
+	uint8_t status = 0;
 	fpp_power_get_led_status(2, &status);
 	printf("LED Status: %d\n", status);
+	return status;
 }
 
 // LED 0 (standby led) doesn't exist on my hardware...

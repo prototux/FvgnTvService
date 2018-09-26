@@ -1,5 +1,6 @@
 #ifndef __FPP_H__
 #define __FPP_H__
+#include "fpp_signal.h"
 #include "fpp_3d.h"
 #include "fpp_arc.h"
 #include "fpp_atbm8878.h"
@@ -42,7 +43,6 @@
 #include "fpp_scart.h"
 #include "fpp_sec.h"
 #include "fpp_set.h"
-#include "fpp_signal.h"
 #include "fpp_svideo.h"
 #include "fpp_system.h"
 #include "fpp_timer.h"

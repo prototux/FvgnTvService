@@ -6,18 +6,18 @@
 #define __FPP_PC_H__
 
 /**
- * fpp_pc_process_signal_formatchange is not documented yet.
+ * @brief React to format change
  */
-//void fpp_pc_process_signal_formatchange(void);
+void fpp_pc_process_signal_formatchange(uint32_t linein, struct fpp_signal_format format);
 
 /**
- * fpp_pc_process_signal_locked is not documented yet.
+ * @brief React to signal lock (???)
  */
-//void fpp_pc_process_signal_locked(void);
+void fpp_pc_process_signal_locked(uint32_t linein, uint32_t signal_id, uint8_t unknown);
 
 /**
- * fpp_pc_process_signal_unlock is not documented yet.
+ * @brief React to signal unlock (???)
  */
-//void fpp_pc_process_signal_unlock(void);
+void fpp_pc_process_signal_unlock(uint32_t linein);
 
 #endif /* __FPP_PC_H__ */

@@ -5,6 +5,8 @@
 #ifndef __FPP_SCART_H__
 #define __FPP_SCART_H__
 
+#include <inttypes.h>
+
 /**
  * fpp_scart_get_pin16_level is not documented yet.
  */
@@ -71,18 +73,18 @@ void fpp_scart_out_set_video_type(void);
 void fpp_scart_out_set_wss(void);
 
 /**
- * fpp_scart_process_signal_formatchange is not documented yet.
+ * @brief React to format change
  */
-//void fpp_scart_process_signal_formatchange(void);
+void fpp_scart_process_signal_formatchange(uint32_t linein, struct fpp_signal_format format);
 
 /**
- * fpp_scart_process_signal_locked is not documented yet.
+ * @brief React to signal lock (???)
  */
-//void fpp_scart_process_signal_locked(void);
+void fpp_scart_process_signal_locked(uint32_t linein, uint32_t signal_id, uint8_t unknown);
 
 /**
- * fpp_scart_process_signal_unlock is not documented yet.
+ * @brief React to signal unlock (???)
  */
-//void fpp_scart_process_signal_unlock(void);
+void fpp_scart_process_signal_unlock(uint32_t linein);
 
 #endif /* __FPP_SCART_H__ */

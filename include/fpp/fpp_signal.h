@@ -5,6 +5,8 @@
 #ifndef __FPP_SIGNAL_H__
 #define __FPP_SIGNAL_H__
 
+#include <inttypes.h>
+
 /**
  * @brief Signal format long definition
  */
@@ -134,10 +136,9 @@ void fpp_signal_get_hdmi_provider_type(enum fpp_hdmi_provider_type *provider);
 //void fpp_signal_get_info(void);
 
 /**
- * fpp_signal_get_lock_state is not documented yet.
- * unused
+ * @brief Get lock state
  */
-//void fpp_signal_get_lock_state(void);
+void fpp_signal_get_lock_state(uint32_t linein, uint8_t *status);
 
 /**
  * @brief Get the sound system type
@@ -161,16 +162,14 @@ void fpp_signal_get_video_size(uint32_t linein, uint8_t reserved, uint16_t *widt
 //void fpp_signal_get_wss(void);
 
 /**
- * fpp_signal_is_dvi is not documented yet.
- * unused, i suppose say if signal is dvi-on-hdmi or "real" hdmi
+ * @brief Say if signal is dvi
  */
-//void fpp_signal_is_dvi(void);
+void fpp_signal_is_dvi(uint32_t linein, uint8_t *status);
 
 /**
- * fpp_signal_is_interlaced is not documented yet.
- * unused, should say if the signal is enterlaced
+ * @brief Say if the input signal is interlaced or not
  */
-//void fpp_signal_is_interlaced(void);
+void fpp_signal_is_interlaced(uint32_t linein, uint8_t *status);
 
 /**
  * fpp_signal_monitor_afd_change is not documented yet.
@@ -182,7 +181,7 @@ void fpp_signal_get_video_size(uint32_t linein, uint8_t reserved, uint16_t *widt
  * @brief "un-init" a monitor
  * @param linein (optional) linein to "un-init" for
  */
-//void fpp_signal_monitor_exinit(uint32_t linein);
+void fpp_signal_monitor_exinit(uint32_t linein);
 
 /**
  * @brief Monitor for format changes and call the callback if it does change
@@ -190,7 +189,7 @@ void fpp_signal_get_video_size(uint32_t linein, uint8_t reserved, uint16_t *widt
  * @param enabled enable or disable the trigger
  * @param callback function to call when format changes
  */
-void fpp_signal_monitor_formatchange(uint32_t linein, uint8_t enabled, void (*callback)(void));
+void fpp_signal_monitor_formatchange(uint32_t linein, uint8_t enabled, uint8_t (*callback)(void));
 
 /**
  * @brief Init the monitor for a given linein
@@ -204,7 +203,7 @@ void fpp_signal_monitor_init(uint32_t linein);
  * @param enabled enable or disable the trigger
  * @param callback function to call when signal is locked (?)
  */
-void fpp_signal_monitor_lock(uint32_t linein, uint8_t enabled, void (*callback)(void));
+void fpp_signal_monitor_lock(uint32_t linein, uint8_t enabled, uint8_t (*callback)(void));
 
 /**
  * fpp_signal_monitor_scart_change is not documented yet.
@@ -218,7 +217,7 @@ void fpp_signal_monitor_lock(uint32_t linein, uint8_t enabled, void (*callback)(
  * @param enabled enable or disable the trigger
  * @param callback function to call when cable is plugged
  */
-void fpp_signal_monitor_src_insert(uint32_t linein, uint8_t enabled, void (*callback)(void));
+void fpp_signal_monitor_src_insert(uint32_t linein, uint8_t enabled, uint8_t (*callback)(void));
 
 /**
  * @brief Monitor for signal unlock (what is this?) and call the callback if needed
@@ -226,7 +225,7 @@ void fpp_signal_monitor_src_insert(uint32_t linein, uint8_t enabled, void (*call
  * @param enabled enable or disable the trigger
  * @param callback function to call when signal is unlocked (?)
  */
-void fpp_signal_monitor_unlock(uint32_t linein, uint8_t enabled, void (*callback)(void));
+void fpp_signal_monitor_unlock(uint32_t linein, uint8_t enabled, uint8_t (*callback)(void));
 
 /**
  * fpp_signal_monitor_wss_change is not documented yet.

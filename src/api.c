@@ -16,7 +16,7 @@
 #include "platform.h"
 
 
-onion_connection_status api_process_linear(onion_request *req, onion_response *res, uint8_t *current_value, int (*set_function)(uint8_t))
+onion_connection_status api_process_linear(onion_request *req, onion_response *res, uint8_t *current_value, uint8_t (*set_function)(uint8_t))
 {
 	const onion_request_flags flags = onion_request_get_flags(req);
 
@@ -83,7 +83,7 @@ onion_connection_status api_process_linear(onion_request *req, onion_response *r
 	}
 }
 
-onion_connection_status api_process_bool(onion_request *req, onion_response *res, uint8_t *current_value, int (*set_function)(uint8_t))
+onion_connection_status api_process_bool(onion_request *req, onion_response *res, uint8_t *current_value, uint8_t (*set_function)(uint8_t))
 {
 	const onion_request_flags flags = onion_request_get_flags(req);
 

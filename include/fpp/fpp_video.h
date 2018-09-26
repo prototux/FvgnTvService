@@ -93,14 +93,14 @@ enum fpp_color_param {
 //void fpp_video_decode_pushData(void);
 
 /**
- * fpp_video_enable_dynamic_contrast is not documented yet.
+ * @brief Enable/Disable dynamic contrast adjustement
  */
-//void fpp_video_enable_dynamic_contrast(void);
+void fpp_video_enable_dynamic_contrast(uint8_t enabled);
 
 /**
- * fpp_video_enable_film_mode is not documented yet.
+ * @brief Enable/Disable film mode, should "enhance" DVD/480p mpeg...
  */
-//void fpp_video_enable_film_mode(void);
+void fpp_video_enable_film_mode(uint8_t enabled);
 
 /**
  * @brief Freezes the video to current frame
@@ -109,14 +109,14 @@ enum fpp_color_param {
 void fpp_video_freeze(int freeze);
 
 /**
- * fpp_video_get_background_light is not documented yet.
+ * @brief Get the background light
  */
-//void fpp_video_get_background_light(void);
+void fpp_video_get_background_light(void);
 
 /**
- * fpp_video_get_black_field_status is not documented yet.
+ * @brief Get black field status (???)
  */
-//void fpp_video_get_black_field_status(void);
+void fpp_video_get_black_field_status(uint8_t *status);
 
 /**
  * @brief Inits the video subsystem.
@@ -135,14 +135,14 @@ void fpp_video_mute(int mute);
 //void fpp_video_out_mute_output(void);
 
 /**
- * fpp_video_set_background_light is not documented yet.
+ * @brief Set the backlight level
  */
-//void fpp_video_set_background_light(void);
+void fpp_video_set_background_light(struct fpp_video_adj adj);
 
 /**
- * fpp_video_set_black_stretch is not documented yet.
+ * @brief Set the black stretch, should make dark colors darker
  */
-//void fpp_video_set_black_stretch(void);
+void fpp_video_set_black_stretch(enum fpp_black_stretch);
 
 /**
  * @brief Set video brightness
@@ -152,9 +152,9 @@ void fpp_video_mute(int mute);
 int fpp_video_set_brightness(uint8_t unknown, struct fpp_video_adj adj);
 
 /**
- * fpp_video_set_color_param is not documented yet.
+ * @brief Set the color mode
  */
-//void fpp_video_set_color_param(void);
+void fpp_video_set_color_param(enum fpp_color_param param);
 
 /**
  * fpp_video_set_colorspace is not documented yet.
@@ -177,19 +177,19 @@ int fpp_video_set_brightness(uint8_t unknown, struct fpp_video_adj adj);
 //void fpp_video_set_filterwindow(void);
 
 /**
- * fpp_video_set_flesh_tone is not documented yet.
+ * @brief Enable/Disable flesh tone "enhancement" (makes white skin more red)
  */
-//void fpp_video_set_flesh_tone(void);
+void fpp_video_set_flesh_tone(uint8_t enabled);
 
 /**
- * fpp_video_set_game_mode is not documented yet.
+ * @brief Enable/Disable game mode (should have less lag but less quality also)
  */
-//void fpp_video_set_game_mode(void);
+void fpp_video_set_game_mode(uint8_t enabled);
 
 /**
- * fpp_video_set_gamma is not documented yet.
+ * @brief Set gamma (between 1 and 6)
  */
-//void fpp_video_set_gamma(void);
+void fpp_video_set_gamma(uint8_t value);
 
 /**
  * fpp_video_set_gamma_10p is not documented yet.
@@ -197,14 +197,14 @@ int fpp_video_set_brightness(uint8_t unknown, struct fpp_video_adj adj);
 //void fpp_video_set_gamma_10p(void);
 
 /**
- * fpp_video_set_hue is not documented yet.
+ * @brief Set hue
  */
-//void fpp_video_set_hue(void);
+void fpp_video_set_hue(uint8_t unknown, struct fpp_video_adj adj);
 
 /**
- * fpp_video_set_mpeg_nr is not documented yet.
+ * @brief Reduces MPEG compression noise/artifacts
  */
-//void fpp_video_set_mpeg_nr(void);
+void fpp_video_set_mpeg_nr(enum fpp_mpeg_noise_reduction);
 
 /**
  * @brief Set the video mute color
@@ -217,7 +217,7 @@ void fpp_video_set_mute_color(uint8_t red, uint8_t green, uint8_t blue);
 /**
  * fpp_video_set_noise_reduction is not documented yet.
  */
-//void fpp_video_set_noise_reduction(void);
+void fpp_video_set_noise_reduction(enum fpp_noise_reduction value);
 
 /**
  * fpp_video_set_pq_algorithm is not documented yet.
@@ -225,14 +225,14 @@ void fpp_video_set_mute_color(uint8_t red, uint8_t green, uint8_t blue);
 //void fpp_video_set_pq_algorithm(void);
 
 /**
- * fpp_video_set_saturation is not documented yet.
+ * @brief Set saturation
  */
-//void fpp_video_set_saturation(void);
+void fpp_video_set_saturation(uint8_t unknown, struct fpp_video_adj adj);
 
 /**
- * fpp_video_set_sharpness is not documented yet.
+ * @brief Set sharpness
  */
-//void fpp_video_set_sharpness(void);
+void fpp_video_set_sharpness(uint8_t unknown, struct fpp_video_adj adj);
 
 /**
  * @brief Turns ON or OFF the backlight

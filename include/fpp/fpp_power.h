@@ -21,9 +21,9 @@ void fpp_power_get_led_status(uint8_t led, uint8_t *status);
 void fpp_power_get_wakeup_source(void);
 
 /**
- * fpp_power_off is not documented yet.
+ * @brief Poweroff the system
  */
-//void fpp_power_off(void);
+void fpp_power_off(uint8_t poweroff);
 
 /**
  * @brief Turns ON or OFF the backlight

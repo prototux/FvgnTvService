@@ -13,9 +13,9 @@
 void fpp_zoom_get_afd_info(void);
 
 /**
- * fpp_zoom_get_vga_para is not documented yet.
+ * @brief return the vga paramters
  */
-//void fpp_zoom_get_vga_para(void);
+void fpp_zoom_get_vga_para(uint16_t *hpos, uint16_t *vpos, uint16_t *clock, uint16_t *phase);
 
 /**
  * fpp_zoom_set_aspect_ratio is not documented yet.

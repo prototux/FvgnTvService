@@ -5,19 +5,21 @@
 #ifndef __FPP_CVBS_H__
 #define __FPP_CVBS_H__
 
-/**
- * fpp_cvbs_process_signal_formatchange is not documented yet.
- */
-//void fpp_cvbs_process_signal_formatchange(void);
+#include <inttypes.h>
 
 /**
- * fpp_cvbs_process_signal_locked is not documented yet.
+ * @brief React to format change
  */
-//void fpp_cvbs_process_signal_locked(void);
+void fpp_cvbs_process_signal_formatchange(uint32_t linein, struct fpp_signal_format format);
 
 /**
- * fpp_cvbs_process_signal_unlock is not documented yet.
+ * @brief React to signal lock (???)
  */
-//void fpp_cvbs_process_signal_unlock(void);
+void fpp_cvbs_process_signal_locked(uint32_t linein, uint32_t signal_id, uint8_t unknown);
+
+/**
+ * @brief React to signal unlock (???)
+ */
+void fpp_cvbs_process_signal_unlock(uint32_t linein);
 
 #endif /* __FPP_CVBS_H__ */

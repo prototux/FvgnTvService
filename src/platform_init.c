@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include <fpp/fpp.h>
+#include "platform.h"
 
 void platform_init()
 {

@@ -199,6 +199,6 @@ void fpp_linein_open_scart(uint32_t linein);
  * @param linein linein to check from
  * @param status where to write the status (plugged/unplugged) to
  */
-//void fpp_linein_src_insert_check(uint32_t linein, uint8_t status);
+void fpp_linein_src_insert_check(uint32_t linein, uint8_t *status);
 
 #endif /* __FPP_LINEIN_H__ */

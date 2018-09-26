@@ -22,8 +22,6 @@ int main(int argc, char *argv[])
 	platform_init();
 	platform_open_hdmi();
 	platform_power_set_led(0);
-	usleep(400000);
-	platform_power_poweroff();
 
 	// Libonion init
 	onion *o = onion_new(O_ONE_LOOP);

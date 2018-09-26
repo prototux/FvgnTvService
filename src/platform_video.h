@@ -1,6 +1,8 @@
 #ifndef __PLATFORM_VIDEO_H__
 #define __PLATFORM_VIDEO_H__
 
+#include <fpp/fpp.h>
+
 // Current video settings
 extern uint8_t platform_video_brightness;
 extern uint8_t platform_video_contrast;
@@ -25,25 +27,28 @@ extern uint16_t platform_video_white_balance[6];
 #define E_OUTOFBOUNDS 2
 
 // Functions
-int platform_video_set_brightness(uint8_t value);
-int platform_video_set_contrast(uint8_t value);
-int platform_video_set_saturation(uint8_t value);
-int platform_video_set_hue(uint8_t value);
-int platform_video_set_sharpness(uint8_t value);
-int platform_video_set_mute_color(uint8_t red, uint8_t green, uint8_t blue);
-int platform_video_mute(uint8_t muted);
-int platform_video_freeze(uint8_t frozen);
-int platform_video_set_backlight(uint8_t value);
-int platform_video_set_noise_reduction(uint8_t value);
-int platform_video_set_black_stretch(uint8_t value);
-int platform_video_set_gamma(uint8_t value);
-int platform_video_enable_film_mode(uint8_t enabled);
-int platform_video_enable_dynamic_contrast(uint8_t enabled);
+uint8_t platform_video_set_brightness(uint8_t value);
+uint8_t platform_video_set_contrast(uint8_t value);
+uint8_t platform_video_set_saturation(uint8_t value);
+uint8_t platform_video_set_hue(uint8_t value);
+uint8_t platform_video_set_sharpness(uint8_t value);
+uint8_t platform_video_set_mute_color(uint8_t red, uint8_t green, uint8_t blue);
+uint8_t platform_video_mute(uint8_t muted);
+uint8_t platform_video_freeze(uint8_t frozen);
+uint8_t platform_video_set_backlight(uint8_t value);
+uint8_t platform_video_set_noise_reduction(uint8_t value);
+uint8_t platform_video_set_black_stretch(uint8_t value);
+uint8_t platform_video_set_gamma(uint8_t value);
+uint8_t platform_video_enable_film_mode(uint8_t enabled);
+uint8_t platform_video_enable_dynamic_contrast(uint8_t enabled);
 //int platform_video_set_mpeg_noise_reduction(enum mpeg_noise_reduction level);
-int platform_video_enable_flesh_tone(uint8_t enabled);
-int platform_video_enable_game_mode(uint8_t enabled);
+uint8_t platform_video_enable_flesh_tone(uint8_t enabled);
+uint8_t platform_video_enable_game_mode(uint8_t enabled);
 //int platform_video_set_color_param(enum color_param param);
-int platform_video_set_white_balance(uint16_t r_gain, uint16_t r_offset, uint16_t g_gain, uint16_t g_offset, uint16_t b_gain, uint16_t b_offset);
-
+uint8_t platform_video_set_white_balance(uint16_t r_gain, uint16_t r_offset, uint16_t g_gain, uint16_t g_offset, uint16_t b_gain, uint16_t b_offset);
+uint8_t platform_video_get_blackfield_status();
+void platform_get_framerate(uint8_t *framerate);
+void platform_get_video_size(uint8_t linein, uint16_t *width, uint16_t *height);
+uint8_t platform_video_set_color_param(enum fpp_color_param param);
 
 #endif /* __PLATFORM_VIDEO_H__ */

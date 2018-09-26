@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #include <fpp/fpp.h>
 #include "platform.h"
@@ -284,7 +285,7 @@ uint8_t platform_input_switch_to(uint32_t input)
 	platform_input_current_linein = input;
 
 	// Start monitors for new linein
-	fpp_signal_monitor_exinit();
+	//fpp_signal_monitor_exinit(platform_input_current_linein);
 	fpp_signal_monitor_init(input);
 	fpp_signal_monitor_formatchange(platform_input_current_linein, 1, platform_input_formatchange);
 	fpp_signal_monitor_src_insert(platform_input_current_linein, 1, platform_input_plugged);
@@ -359,6 +360,7 @@ uint8_t platform_input_switch_to(uint32_t input)
     fpp_hdmi_process_signal_formatchange(input, new_format);
     fpp_zoom_set_crop_window(input, &new_format, 0, 0, new_format.width, new_format.height);
     fpp_zoom_set_display_window(input, &new_format, 0, 0, 1920, 1080);
+	return 0;
 }
 
 void platform_input_get_format(uint32_t linein, struct fpp_signal_format *format)
@@ -403,7 +405,7 @@ void platform_input_get_vga_infos(uint16_t *hpos, uint16_t *vpos, uint16_t *cloc
 
 uint32_t platform_input_get_color_space(uint32_t linein)
 {
-	uint32_t color_space = 0;
+	uint8_t color_space = 0;
 	fpp_signal_get_color_space(linein, 0, &color_space);
 	return color_space;
 }
