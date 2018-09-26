@@ -53,7 +53,7 @@ uint8_t platform_input_unlock(void)
 		// Other inputs (CATV, TATV, CDTV, TDTV, Storage)
 		// We don't support these so...
 		default:
-			printf("WARN: Cannot process input %d: unsupported\n", platform_input_current_linein);
+			printf("WARN: Cannot process input %u: unsupported\n", platform_input_current_linein);
 	}
 	return 0;
 
@@ -108,7 +108,7 @@ uint8_t platform_input_locked(void)
 		// Other inputs (CATV, TATV, CDTV, TDTV, Storage)
 		// We don't support these so...
 		default:
-			printf("WARN: Cannot process input %d: unsupported\n", platform_input_current_linein);
+			printf("WARN: Cannot process input %u: unsupported\n", platform_input_current_linein);
 	}
 	return 0;
 }
@@ -177,7 +177,7 @@ uint8_t platform_input_formatchange(void)
 		// Other inputs (CATV, TATV, CDTV, TDTV, Storage)
 		// We don't support these so...
 		default:
-			printf("WARN: Cannot process input %d: unsupported\n", platform_input_current_linein);
+			printf("WARN: Cannot process input %u: unsupported\n", platform_input_current_linein);
 	}
 	fpp_zoom_set_crop_window(platform_input_current_linein, &new_format, 0, 0, new_format.width, new_format.height);
 	fpp_zoom_set_display_window(platform_input_current_linein, &new_format, 0, 0, 1920, 1080);
@@ -276,7 +276,7 @@ uint8_t platform_input_switch_to(uint32_t input)
 			// Other inputs (CATV, TATV, CDTV, TDTV, Storage)
 			// Don't close them as they should have never been open in the first place
 			default:
-				printf("WARN: Cannot close input %d: unsupported\n", platform_input_current_linein);
+				printf("WARN: Cannot close input %u: unsupported\n", platform_input_current_linein);
 		}
 	}
 
@@ -337,7 +337,7 @@ uint8_t platform_input_switch_to(uint32_t input)
 		// Other inputs (CATV, TATV, CDTV, TDTV, Storage)
 		// Never open them as storage & TV isn't supported
 		default:
-			printf("WARN: Cannot open input %d: unsupported\n", platform_input_current_linein);
+			printf("WARN: Cannot open input %u: unsupported\n", platform_input_current_linein);
 	}
 	if (input == LINEIN_HDMI1 || input == LINEIN_HDMI2 || input == LINEIN_HDMI3 || input == LINEIN_HDMI4)
 		fpp_linein_open_hdmi(input);
