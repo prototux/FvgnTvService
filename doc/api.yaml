@@ -1,0 +1,566 @@
+swagger: "2.0"
+info:
+  description: "API of fvgntvservice, it should enable more control over your TV"
+  version: "1.0.0"
+  title: "FvgnTvService"
+  contact:
+    email: "jason@prototux.net"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "your-tv.ip"
+basePath: "/"
+tags:
+- name: "video"
+  description: "Video parameters"
+- name: "input"
+  description: "Video input management"
+- name: "system"
+  description: "System and power parameters"
+schemes:
+- "http"
+paths:
+  /:
+    $ref: '#/paths/~1system'
+  /system:
+    get:
+      tags: ["system"]
+      summary: "Get healthcheck and version"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200: 
+          description: "OK"
+          schema:
+            $ref: "#/definitions/system"
+  /system/sleep:
+    get:
+      tags: ["system"]
+      summary: "Get sleep status"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/system_sleep"
+    post:
+      tags: ["system"]
+      summary: "Put the TV in sleep mode"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Video mute settings"
+          required: true
+          schema:
+            $ref: "#/definitions/system_sleep"
+      responses:
+        200: {description: "OK"}
+        400: {description: "Bad parameters"}
+        
+  /system/4k2k:
+    get:
+      tags: ["system"]
+      summary: "Get 4k2k mode status"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/system_4k2k"
+    post:
+      tags: ["system"]
+      summary: "Enter or exit 4k2k mode"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Video mute settings"
+          required: true
+          schema:
+            $ref: "#/definitions/system_4k2k"
+      responses:
+        200: {description: "OK"}
+        
+  /system/led:
+    get:
+      tags: ["system"]
+      summary: "Get front LED status"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/system_led"
+    post:
+      tags: ["system"]
+      summary: "Set front LED status"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Video mute settings"
+          required: true
+          schema:
+            $ref: "#/definitions/system_led"
+      responses:
+        200: {description: "OK"}
+        400: {description: "Bad parameters"}
+        
+  /input:
+    get:
+      tags: ["input"]
+      summary: "Get current input infos"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/get_input"
+    post:
+      tags: ["input"]
+      summary: "Change input"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Video mute settings"
+          required: true
+          schema:
+            $ref: "#/definitions/post_input"
+      responses:
+        200: {description: "OK"}
+        400: {description: "Bad parameters"}
+        
+  /input/plugged:
+    get:
+      tags: ["input"]
+      summary: "Get input lines plugged status"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/input_plugged"       
+
+
+  /video:
+    get:
+      tags: ["video"]
+      summary: "Get current video parameters"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/get_video"
+    post:
+      tags: ["video"]
+      summary: "Change video parameters"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Video mute settings"
+          required: true
+          schema:
+            $ref: "#/definitions/post_video"
+      responses:
+        200: {description: "OK"}
+        400: {description: "Bad parameters"}
+        
+  /video/window:
+    get:
+      tags: ["video"]
+      summary: "Get window settings"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/video_window"
+    post:
+      tags: ["video"]
+      summary: "Change window settings"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Video mute settings"
+          required: true
+          schema:
+            $ref: "#/definitions/video_window"
+      responses:
+        200: {description: "OK"}
+        400: {description: "Bad parameters"}
+
+  /video/mirror:
+    get:
+      tags: ["video"]
+      summary: "Get video mirroring settings"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200: {description: "OK"}
+    post:
+      tags: ["video"]
+      summary: "Change video mirroring settings"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Video mute settings"
+          required: true
+          schema:
+            $ref: "#/definitions/video_mirror"
+      responses:
+        200: {description: "OK"}
+        400: {description: "Bad parameters"}
+
+  /video/mute:
+    get:
+      tags: ["video"]
+      summary: "Get video mute status/settings"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/video_mute"
+    post:
+      tags: ["video"]
+      summary: "Change video mute status/settings"
+      description: ""
+      consumes: ["application/json"]
+      produces: ["application/json"]
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Video mute settings"
+          required: true
+          schema:
+            $ref: "#/definitions/video_mute"
+      responses:
+        200: {description: "OK"}
+        400: {description: "Bad parameters"}
+        
+definitions:
+  system:
+    type: object
+    properties:
+      health: {type: string}
+      version: {type: string}
+      model_name: {type: string}
+      panel_size:
+        type: object
+        properties:
+          width: {type: integer}
+          height: {type: integer}
+      inputs:
+        type: array
+        items: {type: string}
+  system_sleep:
+    type: object
+    properties:
+      mode:
+        type: string
+        enum: ["fakeoff", "poweroff"]
+        default: "fakeoff"
+    required: ["mode"]
+  system_4k2k:
+    type: object
+    properties:
+      mode:
+        type: string
+        enum: ["normal", "4k2k"]
+        default: "normal"
+    required: ["mode"]
+  system_led:
+    type: object
+    properties:
+      mode: 
+        type: string
+        enum: ["off", "on", "breathing"]
+        default: "off"
+    required: ["mode"]
+  get_input:
+    type: object
+    properties:
+      name: {type: string}
+      plugged: {type: boolean}
+      size:
+        type: object
+        properties:
+          width: {type: integer}
+          height: {type: integer}
+      framerate: {type: integer}
+      interlaced: {type: boolean}
+      dvi: {type: boolean}
+      analog_frequency: {type: integer}
+      vga:
+        type: object
+        properties:
+          hpos: {type: integer}
+          vpos: {type: integer}
+          clock: {type: integer}
+          phase: {type: integer}
+  post_input:
+    type: object
+    properties:
+      input: {type: string}
+    required: ["input"]
+  input_plugged:
+    type: object
+    properties:
+      name_of_input: {type: boolean}
+  get_video:
+    type: object
+    properties:
+      brightness:
+        type: integer
+        minimum: 0
+        maximum: 100
+      contrast:
+        type: integer
+        minimum: 0
+        maximum: 100
+      saturation:
+        type: integer
+        minimum: 0
+        maximum: 100
+      hue:
+        type: integer
+        minimum: 0
+        maximum: 100
+      sharpness:
+        type: integer
+        minimum: 0
+        maximum: 100
+      backlight:
+        type: integer
+        minimum: 0
+        maximum: 100
+      gamma:
+        type: integer
+        minimum: 0
+        maximum: 6
+      dynamic_contrast:
+        type: boolean
+        default: false
+      film_mode:
+        type: boolean
+        default: false
+      game_mode:
+        type: boolean
+        default: false
+      flesh_tone:
+        type: boolean
+        default: false
+      black_stretch:
+        type: string
+        enum: ["normal", "dark", "darker", "darkest"]
+        default: "normal"
+      noise_reduction:
+        type: string
+        enum: ["off", "low", "mid", "high", "auto"]
+        default: "auto"
+      mpeg_nr:
+        type: string
+        enum: ["off", "low", "mid", "high"]
+        default: "off"
+      white_balance:
+        type: object
+        properties:
+          red_gain:
+            type: integer
+            minimum: 0
+            maximum: 255
+          red_offset:
+            type: integer
+            minimum: 0
+            maximum: 255
+          green_gain:
+            type: integer
+            minimum: 0
+            maximum: 255
+          green_offset:
+            type: integer
+            minimum: 0
+            maximum: 255
+          blue_gain:
+            type: integer
+            minimum: 0
+            maximum: 255
+          blue_offset:
+            type: integer
+            minimum: 0
+            maximum: 255
+      black_field: {type: boolean}
+      average_luma: {type: integer}
+      luma_distribution:
+        type: array
+        items: {type: integer}
+  post_video:
+    type: object
+    properties:
+      brightness:
+        type: integer
+        minimum: 0
+        maximum: 100
+      contrast:
+        type: integer
+        minimum: 0
+        maximum: 100
+      saturation:
+        type: integer
+        minimum: 0
+        maximum: 100
+      hue:
+        type: integer
+        minimum: 0
+        maximum: 100
+      sharpness:
+        type: integer
+        minimum: 0
+        maximum: 100
+      backlight:
+        type: integer
+        minimum: 0
+        maximum: 100
+      gamma:
+        type: integer
+        minimum: 0
+        maximum: 6
+      dynamic_contrast:
+        type: boolean
+        default: false
+      film_mode:
+        type: boolean
+        default: false
+      game_mode:
+        type: boolean
+        default: false
+      flesh_tone:
+        type: boolean
+        default: false
+      black_stretch:
+        type: string
+        enum: ["normal", "dark", "darker", "darkest"]
+        default: "normal"
+      noise_reduction:
+        type: string
+        enum: ["off", "low", "mid", "high", "auto"]
+        default: "auto"
+      mpeg_nr:
+        type: string
+        enum: ["off", "low", "mid", "high"]
+        default: "off"
+      white_balance:
+        type: object
+        properties:
+          red_gain:
+            type: integer
+            minimum: 0
+            maximum: 255
+          red_offset:
+            type: integer
+            minimum: 0
+            maximum: 255
+          green_gain:
+            type: integer
+            minimum: 0
+            maximum: 255
+          green_offset:
+            type: integer
+            minimum: 0
+            maximum: 255
+          blue_gain:
+            type: integer
+            minimum: 0
+            maximum: 255
+          blue_offset:
+            type: integer
+            minimum: 0
+            maximum: 255
+
+  video_window:
+    type: object
+    properties:
+      crop:
+        type: object
+        properties:
+          pos_x: {type: integer}
+          pos_y: {type: integer}
+          width: {type: integer}
+          height: {type: integer}
+      position:
+        type: object
+        properties:
+          pos_x: {type: integer}
+          pos_y: {type: integer}
+          width: {type: integer}
+          height: {type: integer}
+  video_mirror:
+    type: object
+    properties:
+      video:
+        type: "string"
+        enum: ["normal", "mirrored"]
+        default: "normal"
+      osd:
+        type: "string"
+        enum: ["normal", "mirrored"]
+        default: "normal"
+  video_mute:
+    type: object
+    properties:
+      mute:
+        type: "boolean"
+      color:
+        type: "object"
+        properties:
+          red:
+            type: "integer"
+            minimum: 0
+            maximum: 255
+          green:
+            type: "integer"
+            minimum: 0
+            maximum: 255
+          blue:
+            type: "integer"
+            minimum: 0
+            maximum: 255
+    required: ["mute"]
