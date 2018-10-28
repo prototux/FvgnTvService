@@ -5,5 +5,7 @@
 #include "platform_video.h"
 #include "platform_input.h"
 #include "platform_power.h"
+#include "platform_panel.h"
+#include "platform_zoom.h"
 
 #endif /* __PLATFORM_H__ */

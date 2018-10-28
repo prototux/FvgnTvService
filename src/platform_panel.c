@@ -6,6 +6,9 @@
 
 #include <fpp/fpp.h>
 
+uint8_t platform_panel_current_video_mirror = 0;
+uint8_t platform_panel_current_osd_mirror = 0;
+
 void platform_panel_get_resolution(uint16_t *width, uint16_t *height)
 {
 	struct fpp_resolution infos;
@@ -31,11 +34,13 @@ uint8_t platform_panel_get_luma_distribution(uint16_t *results)
 uint8_t platform_panel_set_video_mirror(uint8_t enabled)
 {
 	fpp_system_panel_set_video_mirror(enabled);
+	platform_panel_current_video_mirror = enabled;
 	return enabled;
 }
 
 uint8_t platform_panel_set_osd_mirror(uint8_t enabled)
 {
 	fpp_system_panel_set_osd_mirror(enabled);
+	platform_panel_current_osd_mirror = enabled;
 	return enabled;
 }

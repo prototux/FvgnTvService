@@ -20,6 +20,7 @@ uint8_t platform_video_dynamic_contrast = 0;
 uint8_t platform_video_current_film_mode = 0;
 uint8_t platform_video_current_game_mode = 0;
 uint8_t platform_video_current_flesh_tone = 0;
+uint16_t platform_video_white_balance[6] = {0};
 
 // Set brightness
 uint8_t platform_video_set_brightness(uint8_t value)
@@ -282,6 +283,12 @@ uint8_t platform_video_set_white_balance(uint16_t r_gain, uint16_t r_offset, uin
 		printf("ERROR: fpp_factory_set_white_balance returned an error\n");
 		return E_FPPRET;
 	}
+	platform_video_white_balance[0] = r_gain;
+	platform_video_white_balance[1] = r_offset;
+	platform_video_white_balance[2] = g_gain;
+	platform_video_white_balance[3] = g_offset;
+	platform_video_white_balance[4] = b_gain;
+	platform_video_white_balance[5] = b_offset;
 	return 0;
 }
 
