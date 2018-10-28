@@ -225,6 +225,8 @@ uint8_t platform_input_switch_to(uint32_t input)
 	// Avoid crashing if first selection
 	if (platform_input_current_linein)
 	{
+		printf("Closing current linein %d\n", platform_input_current_linein);
+
 		// Disable the monitors
 		fpp_signal_monitor_unlock(platform_input_current_linein, 0, 0);
 		fpp_signal_monitor_lock(platform_input_current_linein, 0, 0);
@@ -279,18 +281,20 @@ uint8_t platform_input_switch_to(uint32_t input)
 				printf("WARN: Cannot close input %u: unsupported\n", platform_input_current_linein);
 		}
 	}
+	else
+		printf("Skipped closing for linein %d\n", platform_input_current_linein);
 
 	platform_video_freeze(0);
 
 	platform_input_current_linein = input;
 
 	// Start monitors for new linein
-	//fpp_signal_monitor_exinit(platform_input_current_linein);
+	fpp_signal_monitor_exinit(platform_input_current_linein);
 	fpp_signal_monitor_init(input);
 	fpp_signal_monitor_formatchange(platform_input_current_linein, 1, platform_input_formatchange);
 	fpp_signal_monitor_src_insert(platform_input_current_linein, 1, platform_input_plugged);
 	// Lock just blackout the screen now
-	//fpp_signal_monitor_unlock(input, 1, platform_input_unlock);
+	fpp_signal_monitor_unlock(input, 1, platform_input_unlock);
 	//fpp_signal_monitor_lock(input, 1, platform_input_locked);
 
 	// Open the new linein

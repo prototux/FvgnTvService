@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
 	onion_url_add(url, "video/mute", api_video_mute);
 
 	// Input endpoints
-	onion_url_add(url, "input$", api_input);
+	onion_url_add(url, "^input$", api_input);
 	onion_url_add(url, "input/plugged", api_input_plugged);
 
 	// System endpoints
 	onion_url_add(url, "^$", api_system);
-	onion_url_add(url, "system$", api_system);
+	onion_url_add(url, "^system$", api_system);
 	onion_url_add(url, "system/sleep", api_system_sleep);
 	onion_url_add(url, "system/4k2k", api_system_4k2k);
 	onion_url_add(url, "system/led", api_system_led);
