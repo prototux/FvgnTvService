@@ -13,6 +13,9 @@ uint8_t platform_video_sharpness = 0;
 uint8_t platform_video_backlight = 0;
 uint8_t platform_video_gamma = 0;
 uint8_t platform_video_muted = 0;
+uint8_t platform_video_mute_red = 0;
+uint8_t platform_video_mute_green = 0;
+uint8_t platform_video_mute_blue = 0;
 uint8_t platform_video_dynamic_contrast = 0;
 uint8_t platform_video_current_film_mode = 0;
 uint8_t platform_video_current_game_mode = 0;
@@ -128,6 +131,9 @@ uint8_t platform_video_set_sharpness(uint8_t value)
 uint8_t platform_video_set_mute_color(uint8_t red, uint8_t green, uint8_t blue)
 {
 	fpp_video_set_mute_color(red, green, blue);
+	platform_video_mute_red = red;
+	platform_video_mute_green = green;
+	platform_video_mute_blue = blue;
 	return 1;
 }
 
