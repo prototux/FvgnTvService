@@ -11,7 +11,7 @@ This is a replacement for the "sitatvservice" binary found in TCL/Thomson S69 se
 
 ## Should i install this on my TV?
 
-Probably not unless you are well aware of what's implemented and what's not, and are OK with fvgn's features, or lack thereof.
+Probably not unless you are well aware of what's implemented and what's not, and are OK with fvgn's features, or lack thereof. and you should know that fvgntvservice is probably not as stable as sitatvservice currently.
 
 ## How can install this?
 
@@ -19,7 +19,7 @@ Probably not unless you are well aware of what's implemented and what's not, and
 * Get the libraries in `/applications/soc_libs`, and [libonion](https://github.com/davidmoreno/onion) cross compiled for armhf.
 * Compile fvgn and link it against the `soc_libs`
 * Copy the binary you just compiled in `/applications/tv_bin` or any other place you'd like
-* Replace `sitatvservice` with `fvgntvservice` in `/applications/tv_bin/run.sh`
+* Replace `sitatvservice` with `fvgntvservice` in `/applications/tv_bin/run.sh` (or put it next to sitatvservice)
 * Done
 
 ### Ok, but how do i get a root shell in my TV?
@@ -44,12 +44,12 @@ It is a very early project, so don't expect any usuable binary soon.
 | HDCP2                    | sita only    |        |
 | Video parameters         | sita + fvgn  | ok     |
 | IR Remote control        | sita only    |        |
-| API remote control       | fvgn only    | wip    |
+| API remote control       | fvgn only    | ok     |
 | 3D mode                  | sita only    |        |
 | OSD Ui                   | sita only    |        |
 | OSD notifications        | fvgn only    | todo   |
 | FakeOff mode             | fvgn only    | ok     |
-| Audio control            | sita + fvgn  | todo   |
+| Audio control            | sita only    |        |
 | Smart TV apps            | sita only    |        |
 | TV recording/PVR         | sita only    |        |
 | CI+                      | sita only    |        |
@@ -62,6 +62,7 @@ It is a very early project, so don't expect any usuable binary soon.
 ## Some more deatils about features
 
 * Input selection: For now i don't plan to fully implement scart and vga because they need some specialized functions.
+* Audio: i'd like to implement this, but i have no use for it as i use an external amplifier, so it's a "nice to have" but comes after... everything else, basically.
 * TV features (Channel selection, Teletext/Subtitles, MHEG5/HbbTV, PVR, CI+, EPG...): I dont' plan to implement TV features, i don't watch TV at all. besides, in france, almost everybody have set-top-boxes.
 * HDMI Extensions (HDCP2, CEC, ARC, MHL): i didn't looked into it much, maybe i'll implement some of them later, not planned now.
 * IR Remote control: The plan is to only use the API, so i didn't looked into it

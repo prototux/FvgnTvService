@@ -14,6 +14,7 @@
 #include "tools.h"
 #include "api.h"
 #include "platform.h"
+#include "version.h"
 
 onion_connection_status api_system(void *unused, onion_request *req, onion_response *res)
 {
@@ -28,12 +29,12 @@ onion_connection_status api_system(void *unused, onion_request *req, onion_respo
 		onion_dict_add(jres, "health", "ok", 0);
 
 		// version
-		// TODO
-		onion_dict_add(jres, "version", "alpha", 0);
+		char version[16];
+		snprintf(&version, 8, "v %d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+		onion_dict_add(jres, "version", &version, 0);
 
-		// model_name
-		// TODO
-		onion_dict_add(jres, "model_name", "unknown", 0);
+		// model_name: TODO, now it's hardcoded to my model
+		onion_dict_add(jres, "model_name", "U55S6906", 0);
 
 		// panel_size
 		uint16_t width = 1920, height = 1080;
@@ -43,8 +44,7 @@ onion_connection_status api_system(void *unused, onion_request *req, onion_respo
 		api_dict_add_uint16(resolution, "height", height);
 		onion_dict_add(jres, "panel_size", resolution, OD_DICT);
 
-		// inputs
-		// TODO
+		// inputs (TODO: using config file)
 
 		onion_block *jresb = onion_dict_to_json(jres);
 		onion_response_write(res, onion_block_data(jresb), onion_block_size(jresb));
@@ -66,7 +66,7 @@ onion_connection_status api_system_sleep(void *unused, onion_request *req, onion
 {
 	const onion_request_flags flags = onion_request_get_flags(req);
 
-	// Manage POST case: Set LED
+	// Manage POST case: Set sleep
 	if ((flags & OR_METHODS) == OR_POST)
 	{
 		// Try to get POST data and parse json from it
@@ -84,7 +84,7 @@ onion_connection_status api_system_sleep(void *unused, onion_request *req, onion
 			if (onion_dict_get(jreq, "mode"))
 				fulloff = !strcmp(onion_dict_get(jreq, "mode"), "poweroff");
 
-			// This will not return.. machine is going OFF!
+			// This will likely not return.. machine is going OFF!
 			if (fulloff && sleep)
 				platform_power_poweroff();
 
@@ -95,7 +95,7 @@ onion_connection_status api_system_sleep(void *unused, onion_request *req, onion
 			onion_dict *jres = onion_dict_new();
 			onion_dict_add(jres, "status", "success", 0);
 			onion_dict_add(jres, "power", (platform_power_current_fakeoff)? "off":"on", 0);
-			onion_dict_add(jres, "mode", "fakeoff", 0);
+			onion_dict_add(jres, "mode", (fulloff)?"poweroff":"fakeoff", 0);
 
 			// Build json from dict, send it back, and free the json.
 			onion_block *jresb = onion_dict_to_json(jres);
@@ -116,7 +116,7 @@ onion_connection_status api_system_sleep(void *unused, onion_request *req, onion
 		}
 	}
 
-	// Manage GET case: get current status and color
+	// Manage GET case: get current sleep status
 	else if ((flags & OR_METHODS) == OR_GET)
 	{
 		onion_dict *jres = onion_dict_new();
@@ -142,7 +142,7 @@ onion_connection_status api_system_4k2k(void *unused, onion_request *req, onion_
 {
 	const onion_request_flags flags = onion_request_get_flags(req);
 
-	// Manage POST case: Set LED
+	// Manage POST case: Set 4K2K mode
 	if ((flags & OR_METHODS) == OR_POST)
 	{
 		// Try to get POST data and parse json from it
@@ -181,7 +181,7 @@ onion_connection_status api_system_4k2k(void *unused, onion_request *req, onion_
 		}
 	}
 
-	// Manage GET case: get current status and color
+	// Manage GET case: get current mode
 	else if ((flags & OR_METHODS) == OR_GET)
 	{
 		onion_dict *jres = onion_dict_new();

@@ -21,6 +21,13 @@ uint8_t platform_video_current_film_mode = 0;
 uint8_t platform_video_current_game_mode = 0;
 uint8_t platform_video_current_flesh_tone = 0;
 uint16_t platform_video_white_balance[6] = {0};
+uint8_t platform_video_current_black_stretch = 0;
+uint8_t platform_video_current_noise_reduction = 0;
+uint8_t platform_video_current_mpeg_nr = 0;
+
+char *platform_video_black_stretch_def[] = {"off", "dark", "darker", "darkest"};
+char *platform_video_noise_reduction_def[] = {"off", "low", "mid", "high", "auto"};
+char *platform_video_mpeg_nr_def[] = {"off", "low", "mid", "high", "num"};
 
 // Set brightness
 uint8_t platform_video_set_brightness(uint8_t value)
@@ -174,29 +181,31 @@ uint8_t platform_video_set_backlight(uint8_t value)
 	return 1;
 }
 
-// Set noise reduction (TODO: more testing)
+// Set noise reduction
 uint8_t platform_video_set_noise_reduction(uint8_t value)
 {
 	fpp_video_set_noise_reduction(value);
+	platform_video_current_noise_reduction = value;
 	return 0;
 }
 
-// Set black stretch (TODO: more testing)
+// Set black stretch
 // Should (in theory) make the dark areas look darker
 uint8_t platform_video_set_black_stretch(uint8_t value)
 {
 	fpp_video_set_black_stretch(value);
+	platform_video_current_black_stretch = value;
 	return 0;
 }
 
-// Set gamma (TODO: more testing)
+// Set gamma
 uint8_t platform_video_set_gamma(uint8_t value)
 {
 	fpp_video_set_gamma(value);
 	return 0;
 }
 
-// Enable film mode (TODO: more testing)
+// Enable film mode
 // Apparently, it's when you have mpeg2/480p input (such as DVDs)
 uint8_t platform_video_enable_film_mode(uint8_t enabled)
 {
@@ -204,7 +213,7 @@ uint8_t platform_video_enable_film_mode(uint8_t enabled)
 	return 0;
 }
 
-// Enable dynamic contrast (TODO: more testing)
+// Enable dynamic contrast
 // Should adapt the contrast automatically but... not so good
 uint8_t platform_video_enable_dynamic_contrast(uint8_t enabled)
 {
@@ -212,15 +221,16 @@ uint8_t platform_video_enable_dynamic_contrast(uint8_t enabled)
 	return 0;
 }
 
-// Set MPEG noise reduction (TODO: more testing)
+// Set MPEG noise reduction
 // Should reduce the MPEG compression noise
 uint8_t platform_video_set_mpeg_noise_reduction(enum fpp_mpeg_noise_reduction level)
 {
 	fpp_video_set_mpeg_nr(level);
+	platform_video_current_mpeg_nr = level;
 	return 0;
 }
 
-// Enable flesh tone (TODO: more testing)
+// Enable flesh tone
 // Apparently, it "enhance" the flesh tones, making them more red...
 uint8_t platform_video_enable_flesh_tone(uint8_t enabled)
 {
@@ -232,7 +242,7 @@ uint8_t platform_video_enable_flesh_tone(uint8_t enabled)
 	return 0;
 }
 
-// Enable game mode (TODO: more testing)
+// Enable game mode
 // Apparently, it's for reducing input lag at the expense of quality
 uint8_t platform_video_enable_game_mode(uint8_t enabled)
 {
@@ -240,7 +250,7 @@ uint8_t platform_video_enable_game_mode(uint8_t enabled)
 	return 0;
 }
 
-// Set color mode (TODO: more testing)
+// Set color mode
 uint8_t platform_video_set_color_param(enum fpp_color_param param)
 {
 	fpp_video_set_color_param(param);
@@ -256,8 +266,8 @@ void platform_get_framerate(uint8_t *framerate)
 {
     fpp_signal_get_disp_framerate(framerate);
 }
-// Set white balance/RGB params (TODO: more testing)
-// Currently segfaults
+
+// Set white balance/RGB params
 uint8_t platform_video_set_white_balance(uint16_t r_gain, uint16_t r_offset, uint16_t g_gain, uint16_t g_offset, uint16_t b_gain, uint16_t b_offset)
 {
 	// I have no idea why they did this in uint16s if they check for uint8 boundaries after but well... that's what fpi_video_set_rgb do
@@ -292,6 +302,7 @@ uint8_t platform_video_set_white_balance(uint16_t r_gain, uint16_t r_offset, uin
 	return 0;
 }
 
+// Get Blackfield status (?)
 uint8_t platform_video_get_blackfield_status()
 {
 	uint8_t status;

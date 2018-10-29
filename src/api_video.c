@@ -15,27 +15,6 @@
 #include "api.h"
 #include "platform.h"
 
-void api_dict_add_uint8(onion_dict *dict, char *key, uint8_t value)
-{
-	char value_str[4];
-	snprintf(&value_str, 4, "%d", value);
-	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
-}
-
-void api_dict_add_uint16(onion_dict *dict, char *key, uint16_t value)
-{
-	char value_str[6];
-	snprintf(&value_str, 6, "%d", value);
-	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
-}
-
-void api_dict_add_uint32(onion_dict *dict, char *key, uint32_t value)
-{
-	char value_str[8];
-	snprintf(&value_str, 8, "%d", value);
-	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
-}
-
 onion_dict *api_video_get_current_mute_status(void)
 {
 	onion_dict *status = onion_dict_new();
@@ -93,13 +72,13 @@ onion_dict *api_video_get_current_status(void)
 	onion_dict_add(status, "mirrored", (platform_panel_current_video_mirror)?"true":"false", 0);
 
 	// black_stretch
-	// TODO
+	onion_dict_add(status, "black_stretch", platform_video_black_stretch_def[platform_video_current_black_stretch], 0);
 
 	// noise_reduction
-	// TODO
+	onion_dict_add(status, "noise_reduction", platform_video_noise_reduction_def[platform_video_current_noise_reduction], 0);
 
 	// mpeg_nr
-	// TODO
+	onion_dict_add(status, "mpeg_nr", platform_video_mpeg_nr_def[platform_video_current_mpeg_nr], 0);
 
 	// white_balance
 	onion_dict *wb = onion_dict_new();

@@ -23,6 +23,13 @@ extern uint8_t platform_video_dynamic_contrast;
 extern uint8_t platform_video_current_flesh_tone;
 extern uint8_t platform_video_current_game_mode;
 extern uint16_t platform_video_white_balance[6];
+extern uint8_t platform_video_current_black_stretch;
+extern uint8_t platform_video_current_noise_reduction;
+extern uint8_t platform_video_current_mpeg_nr;
+
+extern char *platform_video_black_stretch_def[];
+extern char *platform_video_noise_reduction_def[];
+extern char *platform_video_mpeg_nr_def[];
 
 // Error codes
 #define E_FPPRET 1

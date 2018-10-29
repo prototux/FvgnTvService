@@ -3,8 +3,19 @@
 
 #include <fpp/fpp.h>
 
-extern uint32_t platform_input_current_linein;
+// Input definitions
+#define PLATFORM_INPUTS_COUNT 18
+struct platform_input_def {
+    char *name;
+    uint32_t id;
+	uint8_t analog;
+};
 
+extern uint32_t platform_input_current_linein;
+extern struct platform_input_def platform_inputs[];
+
+uint32_t platform_input_get_id_from_name(char *name);
+char *platform_input_get_name_from_id(uint32_t id);
 uint8_t platform_input_formatchange(void);
 uint8_t platform_input_switch_to(uint32_t input);
 void platform_input_get_video_size(uint32_t linein, uint16_t *width, uint16_t *height);

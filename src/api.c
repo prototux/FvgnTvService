@@ -15,6 +15,26 @@
 #include "api.h"
 #include "platform.h"
 
+void api_dict_add_uint8(onion_dict *dict, char *key, uint8_t value)
+{
+	char value_str[4];
+	snprintf(&value_str, 4, "%d", value);
+	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
+}
+
+void api_dict_add_uint16(onion_dict *dict, char *key, uint16_t value)
+{
+	char value_str[6];
+	snprintf(&value_str, 6, "%d", value);
+	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
+}
+
+void api_dict_add_uint32(onion_dict *dict, char *key, uint32_t value)
+{
+	char value_str[8];
+	snprintf(&value_str, 8, "%d", value);
+	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
+}
 
 onion_connection_status api_process_linear(onion_request *req, onion_response *res, uint8_t *current_value, uint8_t (*set_function)(uint8_t))
 {

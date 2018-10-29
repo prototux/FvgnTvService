@@ -15,53 +15,11 @@
 #include "api.h"
 #include "platform.h"
 
-struct input_def {
-	char *key;
-	uint32_t value;
-} inputs[] = {
-	{ "hdmi-1", LINEIN_HDMI1 },
-	{ "hdmi-2", LINEIN_HDMI2 },
-	{ "hdmi-3", LINEIN_HDMI3 },
-	{ "hdmi-4", LINEIN_HDMI4 },
-	{ "composite-1", LINEIN_CVBS1 },
-	{ "composite-2", LINEIN_CVBS2 },
-	{ "composite-3", LINEIN_CVBS3 },
-	{ "composite-4", LINEIN_CVBS4 },
-	{ "svideo-1", LINEIN_SVIDEO1 },
-	{ "svideo-2", LINEIN_SVIDEO2 },
-	{ "component-1", LINEIN_COMPONENT1 },
-	{ "component-2", LINEIN_COMPONENT2 },
-	{ "component-3", LINEIN_COMPONENT3 },
-	{ "component-4", LINEIN_COMPONENT4 },
-	{ "vga-1", LINEIN_PC1 },
-	{ "vga-2", LINEIN_PC2 },
-	{ "scart-1", LINEIN_SCART1 },
-	{ "scart-2", LINEIN_SCART2 }
-};
-
-#define NB_INPUTS 18
-
-uint32_t platform_input_get_id_from_name(char *name)
-{
-	for (int i = 0; i < NB_INPUTS; i++)
-		if (!strcmp(inputs[i].key, name))
-			return inputs[i].value;
-	return 0;
-}
-
-char *platform_input_get_name_from_id(uint32_t id)
-{
-	for (int i = 0; i < NB_INPUTS; i++)
-		if (inputs[i].value == id)
-			return inputs[i].key;
-	return 0;
-}
-
 onion_connection_status api_input(void *unused, onion_request *req, onion_response *res)
 {
 	const onion_request_flags flags = onion_request_get_flags(req);
 
-	// Manage POST case: Set LED
+	// Manage POST case: Set input
 	if ((flags & OR_METHODS) == OR_POST)
 	{
 		// Try to get POST data and parse json from it
@@ -98,7 +56,7 @@ onion_connection_status api_input(void *unused, onion_request *req, onion_respon
 		}
 	}
 
-	// Manage GET case: get current status and color
+	// Manage GET case: get current input infos
 	else if ((flags & OR_METHODS) == OR_GET)
 	{
 		onion_dict *jres = onion_dict_new();
@@ -107,8 +65,9 @@ onion_connection_status api_input(void *unused, onion_request *req, onion_respon
 		onion_dict_add(jres, "name", platform_input_get_name_from_id(platform_input_current_linein), 0);
 
 		// plugged
-		onion_dict_add(jres, "plugged", (platform_input_get_status(LINEIN_HDMI4))?"plugged":"unplugged", 0);
+		onion_dict_add(jres, "plugged", (platform_input_get_status(platform_input_current_linein))?"plugged":"unplugged", 0);
 
+		// Get format infos
 		struct fpp_signal_format format;
 		platform_input_get_format(platform_input_current_linein, &format);
 
@@ -128,9 +87,22 @@ onion_connection_status api_input(void *unused, onion_request *req, onion_respon
 		onion_dict_add(jres, "dvi", (format.dvi)?"yes":"no", 0);
 
 		// analog_frequency
-		// TODO
+		for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
+			if (platform_inputs[i].id == platform_input_current_linein && platform_inputs[i].analog)
+				api_dict_add_uint16(jres, "frequency", platform_input_get_analog_frequency(platform_input_current_linein));
+
 		// vga
-		// TODO
+		if (platform_input_current_linein == LINEIN_PC1 || platform_input_current_linein == LINEIN_PC2)
+		{
+			uint16_t hpos, vpos, clock, phase;
+			platform_input_get_vga_infos(&hpos, &vpos, &clock, &phase);
+			onion_dict *vga = onion_dict_new();
+			api_dict_add_uint16(vga, "hpos", hpos);
+			api_dict_add_uint16(vga, "vpos", vpos);
+			api_dict_add_uint16(vga, "clock", clock);
+			api_dict_add_uint16(vga, "phase", phase);
+			onion_dict_add(jres, "vga", vga, OD_DICT);
+		}
 
 		onion_block *jresb = onion_dict_to_json(jres);
 		onion_response_write(res, onion_block_data(jresb), onion_block_size(jresb));
@@ -152,38 +124,14 @@ onion_connection_status api_input_plugged(void *unused, onion_request *req, onio
 {
 	const onion_request_flags flags = onion_request_get_flags(req);
 
-	// Manage GET case: get system infos
+	// Manage GET case: get plugged inputs
 	if ((flags & OR_METHODS) == OR_GET)
 	{
 		onion_dict *jres = onion_dict_new();
 
-		// HDMI
-		onion_dict_add(jres, "hdmi-1", (platform_input_get_status(LINEIN_HDMI1))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "hdmi-2", (platform_input_get_status(LINEIN_HDMI2))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "hdmi-3", (platform_input_get_status(LINEIN_HDMI3))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "hdmi-4", (platform_input_get_status(LINEIN_HDMI4))?"plugged":"unplugged", 0);
-
-		// Composite & S-Video
-		onion_dict_add(jres, "composite-1", (platform_input_get_status(LINEIN_CVBS1))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "composite-2", (platform_input_get_status(LINEIN_CVBS2))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "composite-3", (platform_input_get_status(LINEIN_CVBS3))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "composite-4", (platform_input_get_status(LINEIN_CVBS4))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "svideo-1", (platform_input_get_status(LINEIN_SVIDEO1))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "svideo-2", (platform_input_get_status(LINEIN_SVIDEO2))?"plugged":"unplugged", 0);
-
-		// Component
-		onion_dict_add(jres, "component-1", (platform_input_get_status(LINEIN_COMPONENT1))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "component-2", (platform_input_get_status(LINEIN_COMPONENT2))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "component-3", (platform_input_get_status(LINEIN_COMPONENT3))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "component-4", (platform_input_get_status(LINEIN_COMPONENT4))?"plugged":"unplugged", 0);
-
-		// VGA
-		onion_dict_add(jres, "vga-1", (platform_input_get_status(LINEIN_PC1))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "vga-2", (platform_input_get_status(LINEIN_PC2))?"plugged":"unplugged", 0);
-
-		// SCART
-		onion_dict_add(jres, "scart-1", (platform_input_get_status(LINEIN_SCART1))?"plugged":"unplugged", 0);
-		onion_dict_add(jres, "scart-1", (platform_input_get_status(LINEIN_SCART2))?"plugged":"unplugged", 0);
+		// Enumerate each input, and it's plugged/unplugged state
+		for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
+			onion_dict_add(jres, platform_inputs[i].name, (platform_input_get_status(platform_inputs[i].id))?"plugged":"unplugged", 0);
 
 		onion_block *jresb = onion_dict_to_json(jres);
 		onion_response_write(res, onion_block_data(jresb), onion_block_size(jresb));

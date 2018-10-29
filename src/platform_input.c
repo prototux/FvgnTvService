@@ -7,6 +7,43 @@
 #include "platform.h"
 
 uint32_t platform_input_current_linein = 0;
+struct platform_input_def platform_inputs[] = {
+    { "hdmi-1", LINEIN_HDMI1, 0 },
+    { "hdmi-2", LINEIN_HDMI2, 0 },
+    { "hdmi-3", LINEIN_HDMI3, 0 },
+    { "hdmi-4", LINEIN_HDMI4, 0 },
+    { "composite-1", LINEIN_CVBS1, 1 },
+    { "composite-2", LINEIN_CVBS2, 1 },
+    { "composite-3", LINEIN_CVBS3, 1 },
+    { "composite-4", LINEIN_CVBS4, 1 },
+    { "svideo-1", LINEIN_SVIDEO1, 1 },
+    { "svideo-2", LINEIN_SVIDEO2, 1 },
+    { "component-1", LINEIN_COMPONENT1, 1 },
+    { "component-2", LINEIN_COMPONENT2, 1 },
+    { "component-3", LINEIN_COMPONENT3, 1 },
+    { "component-4", LINEIN_COMPONENT4, 1 },
+    { "vga-1", LINEIN_PC1, 1 },
+    { "vga-2", LINEIN_PC2, 1 },
+    { "scart-1", LINEIN_SCART1, 1 },
+    { "scart-2", LINEIN_SCART2, 1 }
+};
+
+
+uint32_t platform_input_get_id_from_name(char *name)
+{
+	for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
+		if (!strcmp(platform_inputs[i].name, name))
+			return platform_inputs[i].id;
+	return NULL;
+}
+
+char *platform_input_get_name_from_id(uint32_t id)
+{
+	for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
+		if (platform_inputs[i].id == id)
+			return platform_inputs[i].name;
+	return NULL;
+}
 
 uint8_t platform_input_unlock(void)
 {
