@@ -1,350 +1,387 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "API of fvgntvservice, it should enable more control over your TV"
-  version: "1.0.0"
-  title: "FvgnTvService"
+  description: 'API of fvgntvservice, it should enable more control over your TV'
+  version: 1.0.0
+  title: FvgnTvService
   contact:
-    email: "jason@prototux.net"
+    email: jason@prototux.net
   license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "your-tv.ip"
-basePath: "/"
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+basePath: /
 tags:
-- name: "video"
-  description: "Video parameters"
-- name: "input"
-  description: "Video input management"
-- name: "system"
-  description: "System and power parameters"
+  - name: video
+    description: Video parameters
+  - name: input
+    description: Video input management
+  - name: system
+    description: System and power parameters
 schemes:
-- "http"
+  - http
 paths:
   /:
     $ref: '#/paths/~1system'
   /system:
     get:
-      tags: ["system"]
-      summary: "Get healthcheck and version"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - system
+      summary: Get healthcheck and version
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
-        200: 
-          description: "OK"
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/system"
+            $ref: '#/definitions/system'
   /system/sleep:
     get:
-      tags: ["system"]
-      summary: "Get sleep status"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - system
+      summary: Get sleep status
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/system_sleep"
+            $ref: '#/definitions/system_sleep'
     post:
-      tags: ["system"]
-      summary: "Put the TV in sleep mode"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - system
+      summary: Put the TV in sleep mode
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
-        - name: "body"
-          in: "body"
-          description: "Video mute settings"
+        - name: body
+          in: body
+          description: Video mute settings
           required: true
           schema:
-            $ref: "#/definitions/system_sleep"
+            $ref: '#/definitions/system_sleep'
       responses:
-        200: {description: "OK"}
-        400: {description: "Bad parameters"}
-        
+        '200':
+          description: OK
+        '400':
+          description: Bad parameters
   /system/4k2k:
     get:
-      tags: ["system"]
-      summary: "Get 4k2k mode status"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - system
+      summary: Get 4k2k mode status
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/system_4k2k"
+            $ref: '#/definitions/system_4k2k'
     post:
-      tags: ["system"]
-      summary: "Enter or exit 4k2k mode"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - system
+      summary: Enter or exit 4k2k mode
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
-        - name: "body"
-          in: "body"
-          description: "Video mute settings"
+        - name: body
+          in: body
+          description: Video mute settings
           required: true
           schema:
-            $ref: "#/definitions/system_4k2k"
+            $ref: '#/definitions/system_4k2k'
       responses:
-        200: {description: "OK"}
-        
+        '200':
+          description: OK
   /system/led:
     get:
-      tags: ["system"]
-      summary: "Get front LED status"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - system
+      summary: Get front LED status
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/system_led"
+            $ref: '#/definitions/system_led'
     post:
-      tags: ["system"]
-      summary: "Set front LED status"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - system
+      summary: Set front LED status
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
-        - name: "body"
-          in: "body"
-          description: "Video mute settings"
+        - name: body
+          in: body
+          description: Video mute settings
           required: true
           schema:
-            $ref: "#/definitions/system_led"
+            $ref: '#/definitions/system_led'
       responses:
-        200: {description: "OK"}
-        400: {description: "Bad parameters"}
-        
+        '200':
+          description: OK
+        '400':
+          description: Bad parameters
   /input:
     get:
-      tags: ["input"]
-      summary: "Get current input infos"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - input
+      summary: Get current input infos
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/get_input"
+            $ref: '#/definitions/get_input'
     post:
-      tags: ["input"]
-      summary: "Change input"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - input
+      summary: Change input
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
-        - name: "body"
-          in: "body"
-          description: "Video mute settings"
+        - name: body
+          in: body
+          description: Video mute settings
           required: true
           schema:
-            $ref: "#/definitions/post_input"
+            $ref: '#/definitions/post_input'
       responses:
-        200: {description: "OK"}
-        400: {description: "Bad parameters"}
-        
+        '200':
+          description: OK
+        '400':
+          description: Bad parameters
   /input/plugged:
     get:
-      tags: ["input"]
-      summary: "Get input lines plugged status"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - input
+      summary: Get input lines plugged status
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/input_plugged"       
-
-
+            $ref: '#/definitions/input_plugged'
   /video:
     get:
-      tags: ["video"]
-      summary: "Get current video parameters"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - video
+      summary: Get current video parameters
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/get_video"
+            $ref: '#/definitions/get_video'
     post:
-      tags: ["video"]
-      summary: "Change video parameters"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - video
+      summary: Change video parameters
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
-        - name: "body"
-          in: "body"
-          description: "Video mute settings"
+        - name: body
+          in: body
+          description: Video mute settings
           required: true
           schema:
-            $ref: "#/definitions/post_video"
+            $ref: '#/definitions/post_video'
       responses:
-        200: {description: "OK"}
-        400: {description: "Bad parameters"}
-        
-  /video/window:
-    get:
-      tags: ["video"]
-      summary: "Get window settings"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
-      responses:
-        200:
-          description: "OK"
-          schema:
-            $ref: "#/definitions/video_window"
-    post:
-      tags: ["video"]
-      summary: "Change window settings"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
-      parameters:
-        - name: "body"
-          in: "body"
-          description: "Video mute settings"
-          required: true
-          schema:
-            $ref: "#/definitions/video_window"
-      responses:
-        200: {description: "OK"}
-        400: {description: "Bad parameters"}
-
-  /video/mirror:
-    get:
-      tags: ["video"]
-      summary: "Get video mirroring settings"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
-      responses:
-        200: {description: "OK"}
-    post:
-      tags: ["video"]
-      summary: "Change video mirroring settings"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
-      parameters:
-        - name: "body"
-          in: "body"
-          description: "Video mute settings"
-          required: true
-          schema:
-            $ref: "#/definitions/video_mirror"
-      responses:
-        200: {description: "OK"}
-        400: {description: "Bad parameters"}
-
+        '200':
+          description: OK
+        '400':
+          description: Bad parameters
   /video/mute:
     get:
-      tags: ["video"]
-      summary: "Get video mute status/settings"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - video
+      summary: Get video mute status/settings
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/video_mute"
+            $ref: '#/definitions/video_mute'
     post:
-      tags: ["video"]
-      summary: "Change video mute status/settings"
-      description: ""
-      consumes: ["application/json"]
-      produces: ["application/json"]
+      tags:
+        - video
+      summary: Change video mute status/settings
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
-        - name: "body"
-          in: "body"
-          description: "Video mute settings"
+        - name: body
+          in: body
+          description: Video mute settings
           required: true
           schema:
-            $ref: "#/definitions/video_mute"
+            $ref: '#/definitions/video_mute'
       responses:
-        200: {description: "OK"}
-        400: {description: "Bad parameters"}
-        
+        '200':
+          description: OK
+        '400':
+          description: Bad parameters
 definitions:
   system:
     type: object
     properties:
-      health: {type: string}
-      version: {type: string}
-      model_name: {type: string}
+      health:
+        type: string
+        default: "ok"
+      version:
+        type: string
+      model_name:
+        type: string
       panel_size:
         type: object
         properties:
-          width: {type: integer}
-          height: {type: integer}
+          width:
+            type: integer
+          height:
+            type: integer
       inputs:
-        type: array
-        items: {type: string}
+        type: object
+        properties:
+          name_of_input:
+            type: string
+            enum:
+              - enabled
+              - disabled
+            default: disabled
   system_sleep:
     type: object
     properties:
+      sleep:
+        type: boolean
+        default: false
       mode:
         type: string
-        enum: ["fakeoff", "poweroff"]
-        default: "fakeoff"
-    required: ["mode"]
+        enum:
+          - fakeoff
+          - poweroff
+        default: fakeoff
+    required:
+      - mode
   system_4k2k:
     type: object
     properties:
       mode:
         type: string
-        enum: ["normal", "4k2k"]
-        default: "normal"
-    required: ["mode"]
+        enum:
+          - normal
+          - 4k2k
+        default: normal
+    required:
+      - mode
   system_led:
     type: object
     properties:
-      mode: 
+      mode:
         type: string
-        enum: ["off", "on", "breathing"]
-        default: "off"
-    required: ["mode"]
+        enum:
+          - off
+          - on
+          - breathing
+        default: off
+    required:
+      - mode
   get_input:
     type: object
     properties:
-      name: {type: string}
-      plugged: {type: boolean}
+      name:
+        type: string
+      plugged:
+        type: string
+        enum:
+          - plugged
+          - unplugged
+        default: unplugged
       size:
         type: object
         properties:
-          width: {type: integer}
-          height: {type: integer}
-      framerate: {type: integer}
-      interlaced: {type: boolean}
-      dvi: {type: boolean}
-      analog_frequency: {type: integer}
+          width:
+            type: integer
+          height:
+            type: integer
+      framerate:
+        type: integer
+      interlaced:
+        type: boolean
+      dvi:
+        type: boolean
+      analog_frequency:
+        type: integer
       vga:
         type: object
         properties:
-          hpos: {type: integer}
-          vpos: {type: integer}
-          clock: {type: integer}
-          phase: {type: integer}
+          hpos:
+            type: integer
+          vpos:
+            type: integer
+          clock:
+            type: integer
+          phase:
+            type: integer
   post_input:
     type: object
     properties:
-      input: {type: string}
-    required: ["input"]
+      input:
+        type: string
+    required:
+      - input
   input_plugged:
     type: object
     properties:
-      name_of_input: {type: boolean}
+      name_of_input:
+        type: string
+        enum:
+          - plugged
+          - unplugged
+        default: unplugged
   get_video:
     type: object
     properties:
@@ -388,18 +425,34 @@ definitions:
       flesh_tone:
         type: boolean
         default: false
+      mirrored:
+        type: boolean
+        default: false
       black_stretch:
         type: string
-        enum: ["normal", "dark", "darker", "darkest"]
-        default: "normal"
+        enum:
+          - normal
+          - dark
+          - darker
+          - darkest
+        default: normal
       noise_reduction:
         type: string
-        enum: ["off", "low", "mid", "high", "auto"]
-        default: "auto"
+        enum:
+          - off
+          - low
+          - mid
+          - high
+          - auto
+        default: off
       mpeg_nr:
         type: string
-        enum: ["off", "low", "mid", "high"]
-        default: "off"
+        enum:
+          - off
+          - low
+          - mid
+          - high
+        default: off
       white_balance:
         type: object
         properties:
@@ -427,11 +480,36 @@ definitions:
             type: integer
             minimum: 0
             maximum: 255
-      black_field: {type: boolean}
-      average_luma: {type: integer}
+      black_field:
+        type: boolean
+      average_luma:
+        type: integer
       luma_distribution:
         type: array
-        items: {type: integer}
+        items:
+          type: integer
+      crop:
+        type: object
+        properties:
+          start_x:
+            type: integer
+          start_y:
+            type: integer
+          width:
+            type: integer
+          height:
+            type: integer
+      position:
+        type: object
+        properties:
+          pos_x:
+            type: integer
+          pos_y:
+            type: integer
+          width:
+            type: integer
+          height:
+            type: integer
   post_video:
     type: object
     properties:
@@ -475,18 +553,34 @@ definitions:
       flesh_tone:
         type: boolean
         default: false
+      mirrored:
+        type: boolean
+        default: false
       black_stretch:
         type: string
-        enum: ["normal", "dark", "darker", "darkest"]
-        default: "normal"
+        enum:
+          - normal
+          - dark
+          - darker
+          - darkest
+        default: normal
       noise_reduction:
         type: string
-        enum: ["off", "low", "mid", "high", "auto"]
-        default: "auto"
+        enum:
+          - off
+          - low
+          - mid
+          - high
+          - auto
+        default: off
       mpeg_nr:
         type: string
-        enum: ["off", "low", "mid", "high"]
-        default: "off"
+        enum:
+          - off
+          - low
+          - mid
+          - high
+        default: off
       white_balance:
         type: object
         properties:
@@ -514,53 +608,47 @@ definitions:
             type: integer
             minimum: 0
             maximum: 255
-
-  video_window:
-    type: object
-    properties:
       crop:
         type: object
         properties:
-          pos_x: {type: integer}
-          pos_y: {type: integer}
-          width: {type: integer}
-          height: {type: integer}
+          start_x:
+            type: integer
+          start_y:
+            type: integer
+          width:
+            type: integer
+          height:
+            type: integer
       position:
         type: object
         properties:
-          pos_x: {type: integer}
-          pos_y: {type: integer}
-          width: {type: integer}
-          height: {type: integer}
-  video_mirror:
-    type: object
-    properties:
-      video:
-        type: "string"
-        enum: ["normal", "mirrored"]
-        default: "normal"
-      osd:
-        type: "string"
-        enum: ["normal", "mirrored"]
-        default: "normal"
+          pos_x:
+            type: integer
+          pos_y:
+            type: integer
+          width:
+            type: integer
+          height:
+            type: integer
   video_mute:
     type: object
     properties:
       mute:
-        type: "boolean"
+        type: boolean
       color:
-        type: "object"
+        type: object
         properties:
           red:
-            type: "integer"
+            type: integer
             minimum: 0
             maximum: 255
           green:
-            type: "integer"
+            type: integer
             minimum: 0
             maximum: 255
           blue:
-            type: "integer"
+            type: integer
             minimum: 0
             maximum: 255
-    required: ["mute"]
+    required:
+      - mute
