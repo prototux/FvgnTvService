@@ -29,8 +29,22 @@ onion_connection_status api_input(void *unused, onion_request *req, onion_respon
 			jreq = onion_dict_from_json(onion_block_data(dreq));
 		if (jreq)
 		{
-			if (onion_dict_get(jreq, "input"))
-				platform_input_switch_to(platform_input_get_id_from_name(onion_dict_get(jreq, "input")));
+			if (!onion_dict_get(jreq, "input"))
+			{
+				onion_response_set_code(res, 500);
+				onion_response_write0(res, "{\"status\":\"error\",\"message\":\"missing mandatory param input\"}");
+				return OCS_PROCESSED;
+			}
+
+			// Get the ID, check the input, switch to it if correct
+			uint32_t id = platform_input_get_id_from_name(onion_dict_get(jreq, "input"));
+			if (!platform_input_is_enabled(id))
+			{
+				onion_response_set_code(res, 500);
+				onion_response_write0(res, "{\"status\":\"error\",\"message\":\"input non existent or disabled\"}");
+				return OCS_PROCESSED;
+			}
+			platform_input_switch_to(id);
 
 			// Build response dict
 			onion_dict *jres = onion_dict_new();

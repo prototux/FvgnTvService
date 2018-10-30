@@ -9,6 +9,7 @@ struct platform_input_def {
     char *name;
     uint32_t id;
 	uint8_t analog;
+	uint8_t enabled;
 };
 
 extern uint32_t platform_input_current_linein;

@@ -33,8 +33,8 @@ onion_connection_status api_system(void *unused, onion_request *req, onion_respo
 		snprintf(&version, 8, "%d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
 		onion_dict_add(jres, "version", &version, 0);
 
-		// model_name: TODO, now it's hardcoded to my model
-		onion_dict_add(jres, "model_name", "U55S6906", 0);
+		// model_name
+		onion_dict_add(jres, "model_name", (platform_config.system.model)?platform_config.system.model:"unknown", 0);
 
 		// panel_size
 		uint16_t width = 1920, height = 1080;
@@ -44,7 +44,11 @@ onion_connection_status api_system(void *unused, onion_request *req, onion_respo
 		api_dict_add_uint16(resolution, "height", height);
 		onion_dict_add(jres, "panel_size", resolution, OD_DICT);
 
-		// inputs (TODO: using config file)
+		// inputs
+		onion_dict *inputs = onion_dict_new();
+		for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
+			onion_dict_add(inputs, platform_inputs[i].name, (platform_inputs[i].enabled)?"enabled":"disabled", 0);
+		onion_dict_add(jres, "inputs", inputs, OD_DICT);
 
 		onion_block *jresb = onion_dict_to_json(jres);
 		onion_response_write(res, onion_block_data(jresb), onion_block_size(jresb));

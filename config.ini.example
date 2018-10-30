@@ -1,5 +1,6 @@
 [system]
 input = hdmi-3
+model = U55S6906
 config_0 = /application/tclconfig/pq/ID87/
 config_1 = /appliations/tclconfig/pq/patch/
 config_6 = /applicaions/tclconfig/gamma/Gamma7_L32E4300CE.bin
@@ -11,19 +12,30 @@ pq_path = /applications/tclconfig/pq/ID87/
 pq_patch = /applications/tclconfig/pq/patch/
 
 [video]
-brightness=100
-contrast=100
-saturation=100
-hue=0
-sharpness=100
-backlight=100
-gamma=3
-dynamic_contrast=0
-film_mode=0
-game_mode=0
-flesh_tone=0
-black_stretch=0
-noise_reduction=0
-mpeg_nr=0
-video_mirror=0
-osd_mirror=0
+brightness = 100
+contrast = 100
+saturation = 100
+hue = 0
+sharpness = 100
+backlight = 100
+gamma = 3
+dynamic_contrast = 0
+film_mode = 0
+game_mode = 0
+flesh_tone = 0
+black_stretch = 0
+noise_reduction = 0
+mpeg_nr = 0
+video_mirror = 0
+osd_mirror = 0
+
+[inputs]
+hdmi_1 = 1
+hdmi_2 = 1
+hdmi_3 = 1
+hdmi_4 = 1
+composite_1 = 1
+svideo_1 = 1
+component_1 = 1
+vga_1 = 1
+scart_1 = 1
