@@ -63,13 +63,13 @@ It is a very early project, so don't expect any usuable binary soon.
 
 The configuration file is at `/etc/fvgntvservice.conf`, and the path can be overriden with the `FVGN_CONFIG` env variable. There's an example config file to get you started.
 
-## Some more deatils about features
+## Some more details about missing features
 
-* Input selection: For now i don't plan to fully implement scart and vga because they need some specialized functions.
+* Input selection: For now i don't plan to fully implement scart and vga because they need some specialized functions.  There's basic support for VGA and SCART, but i don't use it, YMMV.
 * Audio: i'd like to implement this, but i have no use for it as i use an external amplifier, so it's a "nice to have" but comes after... everything else, basically.
 * TV features (Channel selection, Teletext/Subtitles, MHEG5/HbbTV, PVR, CI+, EPG...): I dont' plan to implement TV features, i don't watch TV at all. besides, in france, almost everybody have set-top-boxes.
 * HDMI Extensions (HDCP2, CEC, ARC, MHL): i didn't looked into it much, maybe i'll implement some of them later, not planned now.
-* IR Remote control: The plan is to only use the API, so i didn't looked into it
+* IR Remote control: The plan is to only use the API, so i didn't looked into it.
 * OSD: I don't plan to display an OSD when there's events (volume change, etc), neither do i plan to implement a UI with menus and the like, because i plan to only use the API, and not the IR remote. I do plan to do stuff with OSD like notifications sent to the API and maybe other features like that.
 * SmartTV apps/media player/netflix: The goal is to have a "dumb tv" aka "computer screen".
 * DLNA/UPNP/Miracast: I don't plan to implement these are they are quite complicated and i can do it with my PC instead.
