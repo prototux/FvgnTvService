@@ -59,6 +59,10 @@ It is a very early project, so don't expect any usuable binary soon.
 | Media player/netflix     | sita only    |        |
 | HDMI-CEC/HDMI-ARC        | Sita only    |        |
 
+## Configuration
+
+The configuration file is at `/etc/fvgntvservice.conf`, and the path can be overriden with the `FVGN_CONFIG` env variable. There's an example config file to get you started.
+
 ## Some more deatils about features
 
 * Input selection: For now i don't plan to fully implement scart and vga because they need some specialized functions.
