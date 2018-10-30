@@ -1,0 +1,29 @@
+[system]
+input = hdmi-3
+config_0 = /application/tclconfig/pq/ID87/
+config_1 = /appliations/tclconfig/pq/patch/
+config_6 = /applicaions/tclconfig/gamma/Gamma7_L32E4300CE.bin
+config_8 = /appications/tclconfig/EDID_BIN/HDMI_EDID_4K_NO3D.bin
+config_7 = /applicaions/tclconfig/EDID_BIN/VGA_EDID.bin
+config_16 = /aplications/tclconfig/audio/audioPP/audioPP_23.txt
+panel = /applications/tclconfig/panel/panel_64_3840_2160.txt
+pq_path = /applications/tclconfig/pq/ID87/
+pq_patch = /applications/tclconfig/pq/patch/
+
+[video]
+brightness=100
+contrast=100
+saturation=100
+hue=0
+sharpness=100
+backlight=100
+gamma=3
+dynamic_contrast=0
+film_mode=0
+game_mode=0
+flesh_tone=0
+black_stretch=0
+noise_reduction=0
+mpeg_nr=0
+video_mirror=0
+osd_mirror=0

@@ -30,7 +30,7 @@ onion_connection_status api_system(void *unused, onion_request *req, onion_respo
 
 		// version
 		char version[16];
-		snprintf(&version, 8, "v %d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+		snprintf(&version, 8, "%d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
 		onion_dict_add(jres, "version", &version, 0);
 
 		// model_name: TODO, now it's hardcoded to my model

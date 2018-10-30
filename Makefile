@@ -9,6 +9,7 @@ LDLIBS = -lm -lonion -lfpp $(FPP_DEPS)
 LDFLAGS = -L./lib
 
 SRC = $(wildcard src/*.c)
+SRC += ./include/inih/ini.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

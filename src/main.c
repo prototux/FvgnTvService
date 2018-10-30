@@ -11,6 +11,7 @@
 #include <onion/response.h>
 #include <onion/url.h>
 #include <onion/low.h>
+#include <inih/ini.h>
 
 #include "tools.h"
 #include "api.h"
@@ -18,9 +19,26 @@
 
 int main(int argc, char *argv[])
 {
+	// Init configuration
+	if (!platform_init_config())
+	{
+		printf("Cannot init config!\n");
+		return EXIT_FAILURE;
+	}
+
 	// Init FPP
-	platform_init();
-	platform_open_hdmi();
+	if (!platform_init_fpp())
+	{
+		printf("Cannot init FPP!\n");
+		return EXIT_FAILURE;
+	}
+
+	// Init video & LED
+	if (!platform_init_video())
+	{
+		printf("Cannot init video\n");
+		return EXIT_FAILURE;
+	}
 	platform_power_set_led(0);
 
 	// Libonion init
