@@ -145,7 +145,8 @@ onion_connection_status api_input_plugged(void *unused, onion_request *req, onio
 
 		// Enumerate each input, and it's plugged/unplugged state
 		for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
-			onion_dict_add(jres, platform_inputs[i].name, (platform_input_get_status(platform_inputs[i].id))?"plugged":"unplugged", 0);
+			if (platform_inputs[i].enabled)
+				onion_dict_add(jres, platform_inputs[i].name, (platform_input_get_status(platform_inputs[i].id))?"plugged":"unplugged", 0);
 
 		onion_block *jresb = onion_dict_to_json(jres);
 		onion_response_write(res, onion_block_data(jresb), onion_block_size(jresb));
