@@ -50,7 +50,7 @@ uint8_t platform_video_set_black_stretch(uint8_t value);
 uint8_t platform_video_set_gamma(uint8_t value);
 uint8_t platform_video_enable_film_mode(uint8_t enabled);
 uint8_t platform_video_enable_dynamic_contrast(uint8_t enabled);
-//int platform_video_set_mpeg_noise_reduction(enum mpeg_noise_reduction level);
+uint8_t platform_video_set_mpeg_noise_reduction(enum fpp_mpeg_noise_reduction level);
 uint8_t platform_video_enable_flesh_tone(uint8_t enabled);
 uint8_t platform_video_enable_game_mode(uint8_t enabled);
 //int platform_video_set_color_param(enum color_param param);

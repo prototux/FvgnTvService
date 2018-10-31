@@ -17,6 +17,8 @@ extern struct platform_input_def platform_inputs[];
 
 uint32_t platform_input_get_id_from_name(char *name);
 char *platform_input_get_name_from_id(uint32_t id);
+void platform_input_enable(const char *name);
+uint8_t platform_input_is_enabled(uint32_t id);
 uint8_t platform_input_formatchange(void);
 uint8_t platform_input_switch_to(uint32_t input);
 void platform_input_get_video_size(uint32_t linein, uint16_t *width, uint16_t *height);

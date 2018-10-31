@@ -34,7 +34,7 @@ uint32_t platform_input_get_id_from_name(char *name)
 	for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
 		if (!strcmp(platform_inputs[i].name, name))
 			return platform_inputs[i].id;
-	return NULL;
+	return 0;
 }
 
 char *platform_input_get_name_from_id(uint32_t id)
@@ -42,10 +42,10 @@ char *platform_input_get_name_from_id(uint32_t id)
 	for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
 		if (platform_inputs[i].id == id)
 			return platform_inputs[i].name;
-	return NULL;
+	return (char*)NULL;
 }
 
-void platform_input_enable(char *name)
+void platform_input_enable(const char *name)
 {
 	for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
 		if (!strcmp(platform_inputs[i].name, name))
@@ -57,7 +57,7 @@ uint8_t platform_input_is_enabled(uint32_t id)
 	for (int i = 0; i < PLATFORM_INPUTS_COUNT; i++)
 		if (platform_inputs[i].id == id)
 			return platform_inputs[i].enabled;
-	return NULL;
+	return 0;
 }
 
 uint8_t platform_input_unlock(void)

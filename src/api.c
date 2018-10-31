@@ -18,21 +18,21 @@
 void api_dict_add_uint8(onion_dict *dict, char *key, uint8_t value)
 {
 	char value_str[4];
-	snprintf(&value_str, 4, "%d", value);
+	snprintf((char*)&value_str, 4, "%d", value);
 	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
 }
 
 void api_dict_add_uint16(onion_dict *dict, char *key, uint16_t value)
 {
 	char value_str[6];
-	snprintf(&value_str, 6, "%d", value);
+	snprintf((char*)&value_str, 6, "%d", value);
 	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
 }
 
 void api_dict_add_uint32(onion_dict *dict, char *key, uint32_t value)
 {
 	char value_str[8];
-	snprintf(&value_str, 8, "%d", value);
+	snprintf((char*)&value_str, 8, "%d", value);
 	onion_dict_add(dict, key, &value_str, OD_DUP_VALUE);
 }
 

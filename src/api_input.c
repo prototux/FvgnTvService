@@ -37,7 +37,7 @@ onion_connection_status api_input(void *unused, onion_request *req, onion_respon
 			}
 
 			// Get the ID, check the input, switch to it if correct
-			uint32_t id = platform_input_get_id_from_name(onion_dict_get(jreq, "input"));
+			uint32_t id = platform_input_get_id_from_name((char*)onion_dict_get(jreq, "input"));
 			if (!platform_input_is_enabled(id))
 			{
 				onion_response_set_code(res, 500);

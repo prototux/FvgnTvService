@@ -13,7 +13,7 @@ struct platform_config_def {
 		char *config_16;
 		char *pq_path;
 		char *pq_patch;
-		char *panel
+		char *panel;
 	} system;
 
 	struct {
@@ -37,7 +37,8 @@ struct platform_config_def {
 };
 extern struct platform_config_def platform_config;
 
-void platform_init(void);
-void platform_open_hdmi(void);
+int platform_init_config();
+int platform_init_fpp();
+int platform_init_video(void);
 
 #endif /* __PLATFORM_INIT_H__ */

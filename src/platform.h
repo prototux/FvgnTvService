@@ -7,5 +7,6 @@
 #include "platform_power.h"
 #include "platform_panel.h"
 #include "platform_zoom.h"
+#include "platform_system.h"
 
 #endif /* __PLATFORM_H__ */

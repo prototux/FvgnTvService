@@ -37,7 +37,7 @@ uint8_t platform_power_get_led()
 	// status: 0 off, 1 on, 2 breathing, 3 flashing ?
 	// Stack smashing it isn't a uint32_t, what?
 	uint32_t status = 0;
-	fpp_power_get_led_status(2, &status);
+	fpp_power_get_led_status(2, (uint8_t*)&status);
 	printf("LED Status: %d\n", status);
 	return (uint8_t)status;
 }
