@@ -1,6 +1,8 @@
 # FvgnTvService
 A Replacement for TCL/Thomson's SmartTV2 software
 
+# WARNING: This repository have moved to git.prototux.net
+
 ## What the heck is this
 
 This is a replacement for the "sitatvservice" binary found in TCL/Thomson S69 series TVs, the original service manage pretty much everything on the TV, this replacement intends to only implement parts of it's features, and add a RESTful API to control the TV.
